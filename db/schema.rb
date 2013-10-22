@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022184052) do
+ActiveRecord::Schema.define(version: 20131022190407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,11 @@ ActiveRecord::Schema.define(version: 20131022184052) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_url"
+  end
+
+  create_table "playlist_foods_users", force: true do |t|
+    t.integer "user_id",          null: false
+    t.integer "playlist_food_id", null: false
   end
 
   create_table "unliked_foods", force: true do |t|
@@ -53,11 +58,6 @@ ActiveRecord::Schema.define(version: 20131022184052) do
     t.integer "ingredient_id",             null: false
     t.integer "pos_votes"
     t.integer "tot_votes",     default: 0
-  end
-
-  create_table "users_playlist_foods", force: true do |t|
-    t.integer "user_id",          null: false
-    t.integer "playlist_food_id", null: false
   end
 
   create_table "users_unliked_foods", force: true do |t|
