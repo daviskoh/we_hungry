@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022190407) do
+ActiveRecord::Schema.define(version: 20131022190843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20131022190407) do
     t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "ingredients_users", force: true do |t|
+    t.integer "user_id",                   null: false
+    t.integer "ingredient_id",             null: false
+    t.integer "pos_votes"
+    t.integer "tot_votes",     default: 0
   end
 
   create_table "playlist_foods", force: true do |t|
@@ -40,6 +47,11 @@ ActiveRecord::Schema.define(version: 20131022190407) do
     t.datetime "updated_at"
   end
 
+  create_table "unliked_foods_users", force: true do |t|
+    t.integer "user_id",         null: false
+    t.integer "unliked_food_id", null: false
+  end
+
   create_table "users", force: true do |t|
     t.boolean  "vege",            default: false
     t.boolean  "vegan",           default: false
@@ -52,17 +64,5 @@ ActiveRecord::Schema.define(version: 20131022190407) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-
-  create_table "users_ingredients", force: true do |t|
-    t.integer "user_id",                   null: false
-    t.integer "ingredient_id",             null: false
-    t.integer "pos_votes"
-    t.integer "tot_votes",     default: 0
-  end
-
-  create_table "users_unliked_foods", force: true do |t|
-    t.integer "user_id",         null: false
-    t.integer "unliked_food_id", null: false
-  end
 
 end
