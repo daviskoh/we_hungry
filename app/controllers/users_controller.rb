@@ -25,6 +25,10 @@ class UsersController < ApplicationController
     render :show
   end
 
+  def edit
+    render :edit
+  end
+
   # helper methods
   private
 
