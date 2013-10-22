@@ -1,14 +1,3 @@
 <h1>Change Account Info</h1>
 
 <%= render 'form' %>
-
-<h2>Check Off Any Food Constraints</h2>
-<% allergies = %w{vege vegan lactose nut} %>
-
-<% allergies.each do |allergy| %>
-  <%= form_for @user do |f| %>
-    <%= f.label allergy.to_sym %>
-    <%= f.hidden_field allergy.to_sym, value: true %>
-    <%= f.submit %>
-  <% end %>
-<% end %>

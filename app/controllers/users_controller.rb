@@ -29,12 +29,20 @@ class UsersController < ApplicationController
     render :edit
   end
 
+  def update
+    if @user.update_attributes(user_params)
+      redirect_to user_path(@user)
+    else
+      render :edit
+    end
+  end
+
   # helper methods
   private
 
   # whitelist
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :vege, :vegan, :lactose, :nut)
   end
 
   def set_user

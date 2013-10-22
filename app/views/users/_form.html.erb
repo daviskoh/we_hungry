@@ -14,5 +14,18 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
 
+  <!-- add allergies -->
+  <%= f.label :vegetarian %>
+  <%= f.check_box :vege %>
+
+  <%= f.label :vegan %>
+  <%= f.check_box :vegan %>
+
+  <%= f.label :dairy %>
+  <%= f.check_box :lactose %>
+
+  <%= f.label :nut_allergy %>
+  <%= f.check_box :nut %>
+
   <%= f.submit %>
 <% end %>
