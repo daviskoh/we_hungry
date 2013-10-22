@@ -37,6 +37,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if @user.destroy
+      redirect_to new_user_path
+    else
+      render :edit
+    end
+  end
+
   # helper methods
   private
 
