@@ -1,0 +1,11 @@
+<h1><%= @user.email %></h1>
+
+<%= link_to "Edit", edit_user_path(@user) %> |
+<%= link_to "Destroy", user_path(@user), :method => :delete %>
+
+<h3>Your Food Recommendations:</h3>
+<ul>
+  <% @user.playlist_foods.each do |food| %>
+    <li><%= link_to playlist_food.name, playlist_food_path(food) %></li>
+  <% end %>
+</ul>
