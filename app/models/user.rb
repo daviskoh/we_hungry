@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  validates :email, presence: true, uniqueness: true
+  # validates :email, presence: true, uniqueness: true
 
   has_and_belongs_to_many :ingredients
   has_and_belongs_to_many :playlist_foods
