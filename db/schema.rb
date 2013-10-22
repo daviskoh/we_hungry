@@ -11,12 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022022712) do
+ActiveRecord::Schema.define(version: 20131022131852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "ingredients", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "playlist_foods", force: true do |t|
     t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -43,6 +49,11 @@ ActiveRecord::Schema.define(version: 20131022022712) do
     t.integer "ingredient_id",             null: false
     t.integer "pos_votes"
     t.integer "tot_votes",     default: 0
+  end
+
+  create_table "users_playlist_foods", force: true do |t|
+    t.integer "user_id",          null: false
+    t.integer "playlist_food_id", null: false
   end
 
   create_table "users_unliked_foods", force: true do |t|
