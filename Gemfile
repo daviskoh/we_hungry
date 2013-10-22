@@ -35,6 +35,9 @@ end
 # Need statistics package
 gem 'statistics2'
 
+# Enable all Heroku features
+gem 'rails_12factor'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
