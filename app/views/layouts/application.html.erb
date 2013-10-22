@@ -8,11 +8,15 @@
 </head>
 <body>
   <nav>
-    <% if logged_in? %>
       <ul>
-        <li><%= link_to 'Logout', session_path, :method => :delete %></li>
+        <% if logged_in? %>
+          <li><%= link_to 'Profile', user_path, :method => :get %></li>
+          <li><%= link_to 'Edit', edit_user_path, :method => :get %></li>
+          <li><%= link_to 'Logout', session_path, :method => :delete %></li>
+        <% else %>
+          <li><%= link_to 'Sign In', new_session_path, :method => :get %></li>
+        <% end %>
       </ul>
-    <% end %>
   </nav>
 
 <%= yield %>
