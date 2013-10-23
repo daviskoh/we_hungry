@@ -8,7 +8,10 @@ class UsersController < ApplicationController
     @user = User.new
 
     # when user created
-    # 10.times do { generate_recommendation }
+    # 10.times do { self.generate_recommendation }
+
+
+
       # user vote like / dislike
         # if dislike
           # add to unliked_foods
@@ -59,10 +62,44 @@ class UsersController < ApplicationController
     end
   end
 
+  # custom routes
+
+  def generate_recommendation
+    # diet constraints
+    # reach into API, set var to response 
+    
+
+    search = "" #.gsub(" ", "+")
+    # max_result = 1000
+    api_id = "1ee7c15f"
+    api_key = "e0bc4464448f7383d9550fdd47fea9a3"
+    response = HTTParty.get("http://api.yummly.com/v1/api/recipes?_app_id=#{api_id}&_app_key=#{api_key}&q=#{search}")
+
+    match = response["matches"].sample
+    food_name = match["recipeName"]
+    image_url = match["smallImageUrls"].first
+
+    PlaylistFood.create(name: food_name, image_url: image_url)
+
+    # establish user & playlist_food relation
+    current_user.playlist_foods << PlaylistFood.last
+
+    # iterate through array and create each unless exist already
+    match["ingredients"].each do |ing|
+      unless Ingredient.all.any { |i| i.name == ing.downcase }
+        Ingredient.create(name: ing.downcase)
+        # most recent food created
+        PlaylistFood.last << ing.downcase
+      end
+    end
+
+    redirect_to user_path(current_user)
+  end
+
   # helper methods
   private
 
-  # whitelist
+  # security ########
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :vege, :vegan, :lactose, :nut)
   end
@@ -76,4 +113,5 @@ class UsersController < ApplicationController
       redirect_to user_path(session[:user_id])
     end
   end
+
 end

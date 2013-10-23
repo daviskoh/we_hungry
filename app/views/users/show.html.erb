@@ -3,7 +3,10 @@
 <%= link_to "Edit", edit_user_path(@user) %> |
 <%= link_to "Destroy", user_path(@user), :method => :delete %>
 
+<%= link_to "alsdkfj", generate_recommendation_user_path %>
+
 <h3>Your Food Recommendations:</h3>
+
 <ul>
   <% @user.playlist_foods.each do |food| %>
     <li>
