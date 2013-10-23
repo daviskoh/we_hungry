@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include UsersHelper 
   # need these before user actions
   # except new & create because initiating
   before_action :authenticated!, :set_user, :authorized!, except: [:new, :create]
@@ -43,6 +44,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    binding.pry
     render :edit
   end
 
