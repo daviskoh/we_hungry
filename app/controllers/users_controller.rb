@@ -75,28 +75,13 @@ class UsersController < ApplicationController
     response = HTTParty.get("http://api.yummly.com/v1/api/recipes?_app_id=#{api_id}&_app_key=#{api_key}&q=#{search}")
 
     matches = response["matches"]
-    
+
     match = _.sample
     food_name = match["recipeName"]
     ingredients = match["ingredients"]
     image_url = match["smallImageUrls"].first
 
-    unless PlaylistFood.all.any { |food| food.name.downcase == food_name.downcase }
-      @food = PlaylistFood.create(name: food_name, image_url: image_url)
-      # establish user & playlist_food relation
-      current_user.playlist_foods << PlaylistFood.last
-    else
-      @food = PlaylistFood.find_by(name: food_name)
-    end
-
-    # iterate through array and create each unless exist already
-    ingredients.each do |ing|
-      unless Ingredient.all.any { |i| i.name == ing.downcase }
-        Ingredient.create(name: ing.downcase)
-        # most recent food created
-        @food.ingredients << ing.downcase
-      end
-    end
+    
 
     redirect_to user_path(current_user)
   end
