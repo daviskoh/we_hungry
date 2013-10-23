@@ -66,8 +66,7 @@ class UsersController < ApplicationController
 
   def generate_recommendation
     # diet constraints
-    # reach into API, set var to response 
-    
+    # algorithm constraints    
 
     search = "" #.gsub(" ", "+")
     # max_result = 1000
@@ -75,21 +74,27 @@ class UsersController < ApplicationController
     api_key = "e0bc4464448f7383d9550fdd47fea9a3"
     response = HTTParty.get("http://api.yummly.com/v1/api/recipes?_app_id=#{api_id}&_app_key=#{api_key}&q=#{search}")
 
-    match = response["matches"].sample
+    matches = response["matches"]
+    
+    match = _.sample
     food_name = match["recipeName"]
+    ingredients = match["ingredients"]
     image_url = match["smallImageUrls"].first
 
-    PlaylistFood.create(name: food_name, image_url: image_url)
-
-    # establish user & playlist_food relation
-    current_user.playlist_foods << PlaylistFood.last
+    unless PlaylistFood.all.any { |food| food.name.downcase == food_name.downcase }
+      @food = PlaylistFood.create(name: food_name, image_url: image_url)
+      # establish user & playlist_food relation
+      current_user.playlist_foods << PlaylistFood.last
+    else
+      @food = PlaylistFood.find_by(name: food_name)
+    end
 
     # iterate through array and create each unless exist already
-    match["ingredients"].each do |ing|
+    ingredients.each do |ing|
       unless Ingredient.all.any { |i| i.name == ing.downcase }
         Ingredient.create(name: ing.downcase)
         # most recent food created
-        PlaylistFood.last << ing.downcase
+        @food.ingredients << ing.downcase
       end
     end
 
