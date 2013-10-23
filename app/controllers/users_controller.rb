@@ -7,20 +7,17 @@ class UsersController < ApplicationController
   def new
     @user = User.new
 
-    # when new user created
-      # 10 playlist_foods generated from api, created
-        # ingredients created
-        # establish playlist_foods ingredients relation
-      # user presented w/ playlist
+    # when user created
+    # 10.times do { generate_recommendation }
       # user vote like / dislike
         # if dislike
           # add to unliked_foods
           # establish user ingredient relation
-          # increment relation by +1
+          # increment relation by -1
           # delete playlist food ingredient relation
           # delete playlist food
         # if like
-          
+
         # end
 
     render :new
