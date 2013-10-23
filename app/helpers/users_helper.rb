@@ -17,10 +17,11 @@ module UsersHelper
 
     @foods = response["matches"]
     @food = @foods.sample
+    @ingredients = @food["ingredients"].map { |i| i.downcase }
 
     @meat = ["bacon","beef","bushmeat","chicken","crab","crabmeat","dark meat","duck","goose","ground beef","horseflesh","lamb","lean","meat","meatball","mince","mincemeat","mutton","partridge","pheasant","pork","poultry","quail","rabbit","stewing steak", "steak", "streaky bacon", "sausage","turkey","veal","venison","white meat","white meat","wild boar"]
-    @dairy = []
-    @nuts = []
+    @dairy = ["Acidophilus Milk", "Ammonium Caseinate", "Butter", "Butter Fat", "Butter Oil", "Butter Solids", "Buttermilk", "Buttermilk Powder", "Calcium Caseinate", "Casein", "Caseinate (in general)", "Cheese (All animal-based)", "Condensed Milk", "Cottage Cheese", "Cream", "Curds", "Custard", "Delactosed Whey", "Demineralized Whey", "Dry Milk Powder", "Dry Milk Solids", "Evaporated Milk", "Ghee (see p109)", "Goat Milk", "Half & Half", "Hydrolyzed Casein", "Hydrolyzed Milk Protein", "Iron Caseinate", "Lactalbumin", "Lactoferrin", "Lactoglobulin", "Lactose", "Lactulose", "Low-Fat Milk", "Magnesium Caseinate", "Malted Milk", "Milk", "Milk Derivative", "Milk Fat", "Milk Powder", "Milk Protein", "Milk Solids", "Natural Butter Flavor", "Nonfat Milk", "Nougat", "Paneer", "Potassium Caseinate", "Pudding", "Recaldent", "Rennet Casein", "Skim Milk", "Sodium Caseinate", "Sour Cream", "Sour Milk Solids", "Sweetened Condensed Milk", "Sweet Whey", "Whey", "Whey Powder", "Whey Protein Concentrate", "Whey Protein Hydrolysate", "Whipped Cream", "Whipped Topping", "Whole Milk", "Yogurt", "Zinc Caseinate"].map! { |i| i.downcase }
+    @nuts = ["Almonds", "Brazil Nuts", "Cacao", "Cashews", "Chestnuts", "Coconut", "Hazelnuts", "Macadamia Nuts", "Mixed Nuts", "Peanuts", "Pecans", "Pine Nuts", "Pistachios", "Soy Nuts", "Sunflower Seeds", "Walnuts", "No Mess Nut Cracker", "Chocolates & Sweets", "Raw Nuts", "Organic Nuts", "Roasted Nuts", "Salted Nuts", "Seasoned Nuts", "Unsalted Nuts", "Pili Nuts", "Nut Butters & Oils", "Bulk Nuts", "Black Walnut" ].map { |i| i.downcase }
 
     sorted_ingredients = current_user.ingredients.sort_by do |ing|
       # positive votes, total votes, 95% confidence interval
@@ -28,21 +29,21 @@ module UsersHelper
     end
     food_needs = sorted_ingredients[0..2]
 
-    until food_needs.all? { |ing| @food["ingredients"].include?(ing) }
+    until food_needs.all? { |ing| @ingredients.include?(ing) }
       if current_user.vege
-        while @food["ingredients"].any? { |ing| @meat.include?(ing) }
+        while @ingredients.any? { |ing| @meat.include?(ing) }
           @food = @foods.sample
         end
       elsif current_user.lactose
-        while @food["ingredients"].any? { |ing| @dairy.include?(ing) }
+        while @ingredients.any? { |ing| @dairy.include?(ing) }
           @food = @foods.sample
         end
       elsif current_user.nut
-        while @food["ingredients"].any? { |ing| @nut.include?(ing) }
+        while @ingredients.any? { |ing| @nut.include?(ing) }
           @food = @foods.sample
         end
       elsif current_user.vegan
-        while @food["ingredients"].any? { |ing| @meat.concat(@dairy).include?(ing) }
+        while @ingredients.any? { |ing| @meat.concat(@dairy).include?(ing) }
           @food = @foods.sample
         end
       else
