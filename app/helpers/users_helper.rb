@@ -9,8 +9,8 @@ module UsersHelper
   end
 
   def api_call
-    search = "" #.gsub(" ", "+")
-      # max_result = 1000
+    search = "" # "Bourbon and Ginger".gsub(" ", "+")
+    # max_result = 1000
     api_id = "1ee7c15f"
     api_key = "e0bc4464448f7383d9550fdd47fea9a3"
     response = HTTParty.get("http://api.yummly.com/v1/api/recipes?_app_id=#{api_id}&_app_key=#{api_key}&q=#{search}")
@@ -29,28 +29,63 @@ module UsersHelper
     end
     food_needs = sorted_ingredients[0..2]
 
-    until food_needs.all? { |ing| @ingredients.include?(ing) }
-      if current_user.vege
-        while @ingredients.any? { |ing| @meat.include?(ing) }
-          @food = @foods.sample
+    # until retrieve unique food
+    # while PlaylistFood.all.any? { |food| food.name.downcase == @food["recipeName"].downcase }
+      until food_needs.all? { |ing| @ingredients.include?(ing) }
+        if current_user.vege
+          while @ingredients.any? { |ing| @meat.include?(ing) }
+            @food = @foods.sample
+          end
+        elsif current_user.lactose
+          while @ingredients.any? { |ing| @dairy.include?(ing) }
+            @food = @foods.sample
+          end
+        elsif current_user.nut
+          while @ingredients.any? { |ing| @nut.include?(ing) }
+            @food = @foods.sample
+          end
+        elsif current_user.vegan
+          while @ingredients.any? { |ing| @meat.concat(@dairy).include?(ing) }
+            @food = @foods.sample
+          end
+        else
+          nil
         end
-      elsif current_user.lactose
-        while @ingredients.any? { |ing| @dairy.include?(ing) }
-          @food = @foods.sample
-        end
-      elsif current_user.nut
-        while @ingredients.any? { |ing| @nut.include?(ing) }
-          @food = @foods.sample
-        end
-      elsif current_user.vegan
-        while @ingredients.any? { |ing| @meat.concat(@dairy).include?(ing) }
-          @food = @foods.sample
-        end
-      else
-        nil
+      end
+    # end
+
+    @food
+  end
+
+  def insert_api_call_to_db
+    # unless food already exists in playlist_foods table
+    unless PlaylistFood.all.any? { |food| food.name.downcase == @food["recipeName"].downcase }
+      # create playlist_food
+      @playlist_food = PlaylistFood.create(name: @food["recipeName"])
+      PlaylistFood.all.last.image_url = @food["smallImageUrls"].first
+    else
+      # prevent duplicate entries
+      unless current_user.playlist_foods.any? { |food| @food["recipeName"] }
+        # find playlist_food
+        @playlist_food = PlaylistFood.find_by(name: @food["recipeName"])
       end
     end
 
-    @food
+    # associate w/ current user
+    current_user.playlist_foods << @playlist_food unless @playlist_food.nil?
+
+    @ingredients.each do |ing|
+      unless Ingredient.all.any? { |i| i.name == ing.downcase }
+        # create ingredient
+        @ingredient = Ingredient.create(name: ing.downcase)
+      else
+        # find ingredient
+        @ingredient = Ingredient.find_by(name: ing)
+      end
+
+      # before this
+      playlist_food = PlaylistFood.where(name: @food["recipeName"])[0]
+      playlist_food.ingredients << @ingredient
+    end
   end
 end

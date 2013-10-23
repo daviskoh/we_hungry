@@ -40,6 +40,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    binding.pry
     render :show
   end
 
@@ -66,23 +67,12 @@ class UsersController < ApplicationController
   # custom routes
 
   def generate_recommendation
-    # diet constraints
-    # algorithm constraints    
+    # retrieve food meeting algo & allergies
 
-    search = "" #.gsub(" ", "+")
-    # max_result = 1000
-    api_id = "1ee7c15f"
-    api_key = "e0bc4464448f7383d9550fdd47fea9a3"
-    response = HTTParty.get("http://api.yummly.com/v1/api/recipes?_app_id=#{api_id}&_app_key=#{api_key}&q=#{search}")
+    api_call
 
-    matches = response["matches"]
-
-    match = _.sample
-    food_name = match["recipeName"]
-    ingredients = match["ingredients"]
-    image_url = match["smallImageUrls"].first
-
-    
+    # add appropriate data to db tables
+    insert_api_call_to_db
 
     redirect_to user_path(current_user)
   end
