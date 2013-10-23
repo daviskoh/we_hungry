@@ -27,5 +27,5 @@
   <%= f.label :nut_allergy %>
   <%= f.check_box :nut %>
 
-  <%= f.submit %>
+  <%= f.submit logged_in? ? 'Update' : 'Sign Up' %>
 <% end %>
