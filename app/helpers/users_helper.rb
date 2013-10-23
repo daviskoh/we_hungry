@@ -13,24 +13,32 @@ module UsersHelper
     @dairy = []
     @nuts = []
 
-    if current_user.vege
-      while @food["ingredients"].any? { |ing| @meat.include?(ing) }
-        @food = @foods.sample
+    sorted_ingredients = current_user.ingredients.sort_by do |ing|
+      # positive votes, total votes, 95% confidence interval
+      ci_lower_bound(ing.pos_vote, ing.tot_vote, 0.95)
+    end
+    food_needs = sorted_ingredients[0..2]
+
+    until food_needs.all? { |ing| @food["ingredients"].include?(ing) }
+      if current_user.vege
+        while @food["ingredients"].any? { |ing| @meat.include?(ing) }
+          @food = @foods.sample
+        end
+      elsif current_user.lactose
+        while @food["ingredients"].any? { |ing| @dairy.include?(ing) }
+          @food = @foods.sample
+        end
+      elsif current_user.nut
+        while @food["ingredients"].any? { |ing| @nut.include?(ing) }
+          @food = @foods.sample
+        end
+      elsif current_user.vegan
+        while @food["ingredients"].any? { |ing| @meat.concat(@dairy).include?(ing) }
+          @food = @foods.sample
+        end
+      else
+        nil
       end
-    elsif current_user.lactose
-      while @food["ingredients"].any? { |ing| @dairy.include?(ing) }
-        @food = @foods.sample
-      end
-    elsif current_user.nut
-      while @food["ingredients"].any? { |ing| @nut.include?(ing) }
-        @food = @foods.sample
-      end
-    elsif current_user.vegan
-      while @food["ingredients"].any? { |ing| @meat.concat(@dairy).include?(ing) }
-        @food = @foods.sample
-      end
-    else
-      nil
     end
 
     @food
