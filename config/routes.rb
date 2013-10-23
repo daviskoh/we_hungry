@@ -6,5 +6,7 @@ WeHungry::Application.routes.draw do
     end
   end
 
+  resources :playlist_foods, only: [:show]
+
   resource :session, only: [:new, :create, :destroy]
 end
