@@ -48,8 +48,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # custom routes
-
   def generate_recommendation
     # retrieve food meeting algo & allergies
     api_call

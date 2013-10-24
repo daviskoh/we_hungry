@@ -1,21 +1,5 @@
 module UsersHelper
-  def normalize_name(food_name)
-    retard_words = ["fiesta", "best", "basic", "carpet", "simple", "friday", "night", "how", "to", "make", "the", "crust", "crustless", "recipe", "really", "all", "two", "three", "four", "world\'s", "last-minute", "1-2-3", "cook", "lunch", "breakfast", "dinner", "tonight", "emeril\'s", "awesome", "awesomely"]
-
-    @food_name = food_name
-
-    retard_words.each do |word|
-      @food_name.gsub(word, "")
-    end
-
-    @food_name.split(" ").join(" ")
-    if @food_name.split(" ")[0] == "and"
-      @food_name.sub("and", "")
-      @food_name.split(" ").join(" ") 
-    end
-
-    @food_name
-  end
+  # def normalize_name
 
   def ci_lower_bound(pos, n, confidence)
     if n == 0

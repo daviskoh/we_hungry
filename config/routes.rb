@@ -5,16 +5,18 @@ WeHungry::Application.routes.draw do
       get 'generate_recommendation'
     end
 
-    member do
-      put 'like'
-    end
+    
+    resources :playlist_foods, only: [:show] do
+      member do
+        put 'like'
+      end
 
-    member do
-      put 'dislike'
+      member do
+        put 'dislike'
+      end
     end
+    
   end
-
-  resources :playlist_foods, only: [:show]
 
   resource :session, only: [:new, :create, :destroy]
 end
