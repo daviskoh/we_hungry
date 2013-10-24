@@ -14,10 +14,11 @@ module UsersHelper
   def api_call
     # search_term = current_user.
     search = "main" # "Bourbon and Ginger".gsub(" ", "+")
-    # max_result = 1000
-    api_id = "1ee7c15f"
-    api_key = "e0bc4464448f7383d9550fdd47fea9a3"
-    response = HTTParty.get("http://api.yummly.com/v1/api/recipes?_app_id=#{api_id}&_app_key=#{api_key}&q=#{search}")
+    max_result = 10000
+    api_id = "9666efa3"
+    api_key = "0173cf5aebdb452af9af01120ff44b4f"
+    response = HTTParty.get("http://api.yummly.com/v1/api/recipes?_app_id=#{api_id}&_app_key=#{api_key}&q=#{search}&maxResult=#{max_result}")
+    binding.pry
     
     @foods = response["matches"]
     @food = @foods.sample
