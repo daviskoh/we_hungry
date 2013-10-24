@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     # generate_vege_food
 
     # insert_food_into_db(@food)
-    binding.pry
+    api_call
 
     redirect_to user_path(current_user)
   end

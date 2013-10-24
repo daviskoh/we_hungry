@@ -3,6 +3,8 @@ module UsersHelper
 
   # def normalize_name
     # implement on recipe names & ingredient names
+  # def name_too_long
+    # implement for display in User show page
 
   ###################################################
 
@@ -28,7 +30,7 @@ module UsersHelper
     api_id = "9666efa3"
     api_key = "0173cf5aebdb452af9af01120ff44b4f"
     response = HTTParty.get("http://api.yummly.com/v1/api/recipes?_app_id=#{api_id}&_app_key=#{api_key}&q=#{search}&maxResult=#{max_result}")
-    binding.pry
+    # binding.pry
     
     @foods = response["matches"]
     @food = @foods.sample
@@ -133,7 +135,7 @@ module UsersHelper
     current_user.playlist_foods << playlist_food
   end
 
-  def ingredient_in_db?(ingredients_array)
+  def ingredients_in_db?(ingredients_array)
     Ingredient.all.any? { |ing| ingredients_array.include?(ing.name) }
   end
 
