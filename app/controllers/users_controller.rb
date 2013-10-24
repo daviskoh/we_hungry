@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    binding.pry
+    # binding.pry
     render :show
   end
 
@@ -68,7 +68,6 @@ class UsersController < ApplicationController
 
   def generate_recommendation
     # retrieve food meeting algo & allergies
-
     api_call
 
     # add appropriate data to db tables

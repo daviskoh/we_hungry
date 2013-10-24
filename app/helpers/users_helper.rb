@@ -1,4 +1,22 @@
 module UsersHelper
+  def normalize_name(food_name)
+    retard_words = ["fiesta", "best", "basic", "carpet", "simple", "friday", "night", "how", "to", "make", "the", "crust", "crustless", "recipe", "really", "all", "two", "three", "four", "world\'s", "last-minute", "1-2-3", "cook", "lunch", "breakfast", "dinner", "tonight", "emeril\'s", "awesome", "awesomely"]
+
+    @food_name = food_name
+
+    retard_words.each do |word|
+      @food_name.gsub(word, "")
+    end
+
+    @food_name.split(" ").join(" ")
+    if @food_name.split(" ")[0] == "and"
+      @food_name.sub("and", "")
+      @food_name.split(" ").join(" ") 
+    end
+
+    @food_name
+  end
+
   def ci_lower_bound(pos, n, confidence)
     if n == 0
         return 0
@@ -9,7 +27,8 @@ module UsersHelper
   end
 
   def api_call
-    search = "" # "Bourbon and Ginger".gsub(" ", "+")
+    # search_term = current_user.
+    search = "main" # "Bourbon and Ginger".gsub(" ", "+")
     # max_result = 1000
     api_id = "1ee7c15f"
     api_key = "e0bc4464448f7383d9550fdd47fea9a3"
@@ -25,31 +44,33 @@ module UsersHelper
 
     sorted_ingredients = current_user.ingredients.sort_by do |ing|
       # positive votes, total votes, 95% confidence interval
-      self.ci_lower_bound(ing.pos_vote, ing.tot_vote, 0.95)
+      ci_lower_bound(ing.pos_vote, ing.tot_vote, 0.95)
     end
     food_needs = sorted_ingredients[0..2]
 
-    # until retrieve unique food
-    # while PlaylistFood.all.any? { |food| food.name.downcase == @food["recipeName"].downcase }
+    # while PlaylistFood.any? { |food| food.name.downcase == @food["recipeName"].downcase }
+      # until retrieve unique food
       until food_needs.all? { |ing| @ingredients.include?(ing) }
-        if current_user.vege
-          while @ingredients.any? { |ing| @meat.include?(ing) }
-            @food = @foods.sample
+        while current_user.playlist_foods.include?(@food["recipeName"])
+          if current_user.vege
+            while @ingredients.any? { |ing| @meat.include?(ing) }
+              @food = @foods.sample
+            end
+          elsif current_user.lactose
+            while @ingredients.any? { |ing| @dairy.include?(ing) }
+              @food = @foods.sample
+            end
+          elsif current_user.nut
+            while @ingredients.any? { |ing| @nut.include?(ing) }
+              @food = @foods.sample
+            end
+          elsif current_user.vegan
+            while @ingredients.any? { |ing| @meat.concat(@dairy).include?(ing) }
+              @food = @foods.sample
+            end
+          else
+            nil
           end
-        elsif current_user.lactose
-          while @ingredients.any? { |ing| @dairy.include?(ing) }
-            @food = @foods.sample
-          end
-        elsif current_user.nut
-          while @ingredients.any? { |ing| @nut.include?(ing) }
-            @food = @foods.sample
-          end
-        elsif current_user.vegan
-          while @ingredients.any? { |ing| @meat.concat(@dairy).include?(ing) }
-            @food = @foods.sample
-          end
-        else
-          nil
         end
       end
     # end
