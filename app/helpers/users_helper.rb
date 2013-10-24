@@ -29,9 +29,8 @@ module UsersHelper
   end
 
   def food_in_db?(food)
-    @food = food
     PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == @food["recipeName"].downcase }
-  end
+  end  
 
   def generate_food
     api_call
@@ -44,17 +43,46 @@ module UsersHelper
     @food
   end
 
-  def insert_food_into_db(food_instance)
+  def is_food_vege?(food)
+    meat = ["bacon","beef","bushmeat","chicken","crab","crabmeat","dark meat","duck","goose","ground beef","horseflesh","lamb","lean","meat","meatball","mince","mincemeat","mutton","partridge","pheasant","pork","poultry","quail","rabbit","stewing steak", "steak", "streaky bacon", "sausage","turkey","veal","venison","white meat","white meat","wild boar"]
+
+    !food["ingredients"].any? { |ing| meat.include?(ing) }
+  end
+
+  def vege_food
+    generate_food
+
+    until is_food_vege?(@food)
+      generate_food
+    end
+
+    @food
+  end
+
+  def insert_food_into_db(food)
     # create playlist_food
-    playlist_food = PlaylistFood.create(name: food_instance["recipeName"], image_url: food_instance["smallImageUrls"].first)
+    playlist_food = PlaylistFood.create(name: food["recipeName"], image_url: food["smallImageUrls"].first)
 
     # establish playlist_food user relation
     current_user.playlist_foods << playlist_food
   end
 
-  def insert_ingredients_into_db()
-    # check if ingredient unique
-      # if unique, create
-  end
+  # def ingredient_in_db?(ingredients_array)
+  #   ingredients_array
+  #   Ingredient.all.any? { |ing| ingredients_array.include?(ing) }
+  # end
+
+  # def insert_ingredients_into_db(ingredients_array)
+  #   # check if ingredient exist already
+  #   unless ingredient_in_db?(ingredients_array)
+  #     # if unique, create each ingredient in array
+  #     ingredients_array.each do { |ing| Ingredient.create(name: ing.downcase) }
+  #       # establish user ingredient relation
+  # -------> HERE
+  #   # if exist already
+  #   else
+  #     nil
+  #   end
+  # end
 
 end
