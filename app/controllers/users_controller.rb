@@ -8,22 +8,6 @@ class UsersController < ApplicationController
   def new
     @user = User.new
 
-    # when user created
-    # 10.times do { self.generate_recommendation }
-
-
-
-      # user vote like / dislike
-        # if dislike
-          # add to unliked_foods
-          # establish user ingredient relation
-          # increment relation by -1
-          # delete playlist food ingredient relation
-          # delete playlist food
-        # if like
-
-        # end
-
     render :new
   end
 

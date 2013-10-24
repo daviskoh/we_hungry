@@ -1,19 +1,20 @@
 <h1><%= @user.email %></h1>
-
-<%= link_to "Edit", edit_user_path(@user) %> |
-<%= link_to "Destroy", user_path(@user), :method => :delete %>
-
-<%= link_to "Generate Food", generate_recommendation_user_path %>
+<!-- put div inside link_to -->
+<%= link_to "Generate Food", generate_recommendation_user_path, id: "generate" %>
 
 <h3>Your Food Recommendations:</h3>
 
 <ul>
   <% @user.playlist_foods.each do |food| %>
-    <li>
-      <%= link_to food.name, playlist_food_path(food) %>
-      <!-- Like Button -->
-      <!-- Dislike Button -->
+    <li class="food">
+      <div class="food_link"><%= link_to food.name, playlist_food_path(food), class: "food_specific" %></div>
+      <div class="rate_buttons">
+        <!-- Like Button -->
+        <div class="thumbs_up"><%= link_to image_tag("http://images.wikia.com/candy-crush-saga/images/7/7e/Thumbs-up-icon.png", class: "thumbs_up"), edit_user_path %></div>
+        <!-- Dislike Button -->
+        <div class="thumbs_down"><%= link_to image_tag("http://upload.wikimedia.org/wikipedia/en/2/2f/Thumbs-down-icon.png", class: "thumbs_down"), dislike_user_path %></div>
         <!-- build out unliked_foods, ingredients, trials before -->
+      </div>
     </li>
   <% end %>
 </ul>

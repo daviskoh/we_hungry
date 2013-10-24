@@ -4,6 +4,14 @@ WeHungry::Application.routes.draw do
     member do
       get 'generate_recommendation'
     end
+
+    member do
+      put 'like'
+    end
+
+    member do
+      put 'dislike'
+    end
   end
 
   resources :playlist_foods, only: [:show]

@@ -1,5 +1,5 @@
 class PlaylistFoodsController < ApplicationController
   def show
-    @show = PlaylistFood.find(params[:id])
+    @food = PlaylistFood.find(params[:id])
   end
 end

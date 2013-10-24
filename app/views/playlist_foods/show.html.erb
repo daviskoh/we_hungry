@@ -1,4 +1,11 @@
-<h1><%= @show.name %></h1>
+<h1><%= @food.name %></h1>
+<h2>Ingredients:</h2>
+<% @food.ingredients.each do |ing| %>
+  <ul>
+    <li><%= ing.name %></li>
+  </ul>
+<% end %>
+
 
 
 

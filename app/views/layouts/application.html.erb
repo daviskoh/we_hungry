@@ -10,17 +10,23 @@
   <nav>
       <ul>
         <% if logged_in? %>
-          <li><%= link_to 'Profile', user_path(current_user), :method => :get %></li>
-          <li><%= link_to 'Edit', edit_user_path, :method => :get %></li>
-          <li><%= link_to 'Logout', session_path, :method => :delete %></li>
+          <li><%= link_to 'Profile', user_path(current_user), class: "nav_button", :method => :get %></li>
+          <li><%= link_to 'Edit', edit_user_path, class: "nav_button", :method => :get %></li>
+          <li><%= link_to 'Logout', session_path, class: "logout", :method => :delete %></li>
         <% else %>
-          <li><%= link_to 'Sign Up', new_user_path, :method => :get %></li>
-          <li><%= link_to 'Login', new_session_path, :method => :get %></li>
+          <li><%= link_to 'Sign Up', new_user_path, class: "nav_button", :method => :get %></li>
+          <li><%= link_to 'Login', new_session_path, class: "nav_button", :method => :get %></li>
         <% end %>
       </ul>
   </nav>
 
-<%= yield %>
+<div id="content">
+  <%= yield %>
+</div>
+
+<footer>
+  <p>By Davis Koh for <%= image_tag "http://i40.tinypic.com/25646yg.png", id: "ga" %> <span>General Assembly</span> 2013</p>
+</footer>
 
 </body>
 </html>
