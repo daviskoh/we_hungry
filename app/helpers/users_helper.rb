@@ -42,7 +42,7 @@ module UsersHelper
     PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == @food["recipeName"].downcase }
   end  
 
-  def generate_food
+  def get_food_from_api
     api_call
 
     # generates unique food not already in PlaylistFood
@@ -85,15 +85,43 @@ module UsersHelper
 
   ###################################################
 
-  def generate_vege_food
-    generate_food
+  # generate food meeting restrictions ##############
 
-    until is_food_vege?(@food)
-      generate_food
-    end
-
-    @food
+  def get_vegan_food
+    get_food_from_api until is_food_vege?(@food)
   end
+
+  def get_milkless_food
+    get_food_from_api until food_meet_lactoselactose?(@food)
+  end
+
+  def get_vegan_food
+    get_food_from_api until is_food_vegan?(@food)
+  end
+
+  def get_nutless_food
+    get_food_from_api until food_meet_nut?(@food)
+  end
+
+  ###################################################  
+
+  # generate food ###################################
+
+  def generate_food
+    if current_user.vege
+      get_vegan_food
+    elsif current_user.lactose
+      get_milkess_food
+    elsif current_user.vegan
+      get_vegan_food
+    elsif current_user.nut
+      get get_nutless_food
+    else
+      get_food_from_api
+    end
+  end
+
+  ###################################################
 
   # database insertion ###############################
 
@@ -105,10 +133,9 @@ module UsersHelper
     current_user.playlist_foods << playlist_food
   end
 
-  # def ingredient_in_db?(ingredients_array)
-  #   ingredients_array
-  #   Ingredient.all.any? { |ing| ingredients_array.include?(ing) }
-  # end
+  def ingredient_in_db?(ingredients_array)
+    Ingredient.all.any? { |ing| ingredients_array.include?(ing.name) }
+  end
 
   # def insert_ingredients_into_db(ingredients_array)
   #   # check if ingredient exist already

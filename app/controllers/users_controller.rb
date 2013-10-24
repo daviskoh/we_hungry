@@ -57,8 +57,9 @@ class UsersController < ApplicationController
     # add appropriate data to db tables
     # insert_api_call_to_db
 
-    generate_food
-    insert_food_into_db(@food)
+    # generate_vege_food
+
+    # insert_food_into_db(@food)
     binding.pry
 
     redirect_to user_path(current_user)
