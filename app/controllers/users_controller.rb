@@ -50,7 +50,9 @@ class UsersController < ApplicationController
 
   def generate_recommendation
     # retrieve food meeting algo & allergies
-    api_call
+    # api_call
+
+    10.times { get_food_recommendation }
 
     # add appropriate data to db tables
     insert_api_call_to_db

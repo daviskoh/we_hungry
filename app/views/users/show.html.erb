@@ -6,15 +6,18 @@
 
 <ul>
   <% @user.playlist_foods.each do |food| %>
-    <li class="food">
-      <div class="food_link"><%= link_to food.name, playlist_food_path(food), class: "food_specific" %></div>
-      <div class="rate_buttons">
-        <!-- Like Button -->
-        <div class="thumbs_up"><%= link_to image_tag("http://images.wikia.com/candy-crush-saga/images/7/7e/Thumbs-up-icon.png", class: "thumbs_up"), like_user_playlis_food_path(current_user, food.id) %></div>
-        <!-- Dislike Button -->
-        <div class="thumbs_down"><%= link_to image_tag("http://upload.wikimedia.org/wikipedia/en/2/2f/Thumbs-down-icon.png", class: "thumbs_down"), dislike_user_playlist_food_path(current_user, food.id), method: "put" %></div>
-        <!-- build out unliked_foods, ingredients, trials before -->
-      </div>
-    </li>
+    <div class="food">
+      <li>
+        <!-- unless food has been disliked or nil???? -->
+          <div class="food_link"><%= link_to food.name, user_playlist_food_path(current_user, food.id), class: "food_specific" %></div>
+          <div class="rate_buttons">
+            <!-- Like Button -->
+            <div class="thumbs_up"><%= link_to image_tag("http://images.wikia.com/candy-crush-saga/images/7/7e/Thumbs-up-icon.png", class: "thumbs_up"), like_user_playlist_food_path(current_user, food.id), method: "put" %></div>
+            <!-- Dislike Button -->
+            <div class="thumbs_down"><%= link_to image_tag("http://upload.wikimedia.org/wikipedia/en/2/2f/Thumbs-down-icon.png", class: "thumbs_down"), dislike_user_playlist_food_path(current_user, food.id), method: "put" %></div>
+            <!-- build out unliked_foods, ingredients, trials before -->
+          </div>
+      </li>
+    </div>
   <% end %>
 </ul>
