@@ -77,6 +77,12 @@ module UsersHelper
     !food["ingredients"].any? { |ing| forbidden.include?(ing) }
   end
 
+  def food_meet_nut?(food)
+    nuts = ["chestnut", "chestnuts", "pinenut", "pinenuts", "Almonds", "Almond", "Brazil Nuts", "Brazil Nuts", "Cacao", "Cashews", "Cashew", "Chestnuts", "Coconut", "Coconuts", "Hazelnuts", "Hazelnut", "Macadamia Nuts", "Macadamia", "Mixed Nuts", "Peanuts", "Peanut", "Pecans", "Pecan", "Pine Nuts", "Pine Nut", "Pistachios", "Pistachio", "Soy Nuts", "Soy Nut", "Sunflower Seeds", "Sunflower Seed", "Walnuts", "Walnut", "Raw Nuts", "Raw Nuts", "Organic Nuts", "Roasted Nuts", "Salted Nuts", "Seasoned Nuts", "Unsalted Nuts", "Pili Nuts", "Nut Butter", "Bulk Nuts", "Black Walnut", "Black Walnuts", "nut", "nuts" ].map! { |i| i.downcase }
+
+    !food["ingredients"].any? { |ing| nuts.include?(ing) }
+  end
+
   ###################################################
 
   def generate_vege_food
