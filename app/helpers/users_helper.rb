@@ -25,19 +25,17 @@ module UsersHelper
 
   def api_call
     # search_term = current_user.
-    search = "main" # "Bourbon and Ginger".gsub(" ", "+")
-    max_result = 10000
-    api_id = "9666efa3"
-    api_key = "0173cf5aebdb452af9af01120ff44b4f"
-    response = HTTParty.get("http://api.yummly.com/v1/api/recipes?_app_id=#{api_id}&_app_key=#{api_key}&q=#{search}&maxResult=#{max_result}")
-    # binding.pry
-    
-    @foods = response["matches"]
-    @food = @foods.sample
+    # search = "main" # "Bourbon and Ginger".gsub(" ", "+")
+    # max_result = 10000
+    # api_id = "9666efa3"
+    # api_key = "0173cf5aebdb452af9af01120ff44b4f"
+    Yummly.search("main", maxResult: 15)
+    # @foods = response["matches"]
+    # @food = @foods.sample
+    binding.pry
+    # @ingredients = @food["ingredients"].map { |ingredient| ingredient.downcase }
 
-    @ingredients = @food["ingredients"].map { |ingredient| ingredient.downcase }
-
-    @food
+    # @food
   end
 
   def food_in_db?(food)

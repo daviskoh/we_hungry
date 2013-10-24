@@ -7,7 +7,6 @@ class PlaylistFoodsController < ApplicationController
     get_user_and_food
 
     @pair[:user]
-    # binding.pry
   end
 
   def dislike

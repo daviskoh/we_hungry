@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include UsersHelper 
+  include UsersHelper
   # need these before user actions
   # except new & create because initiating
   before_action :authenticated!, :set_user, :authorized!, except: [:new, :create]
@@ -24,7 +24,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    # binding.pry
     render :show
   end
 
@@ -58,6 +57,7 @@ class UsersController < ApplicationController
     # insert_api_call_to_db
 
     # generate_vege_food
+    # binding.pry
 
     # insert_food_into_db(@food)
     api_call

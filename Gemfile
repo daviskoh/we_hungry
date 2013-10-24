@@ -47,7 +47,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'httparty'
 
 # recipe / food data
-gem "yummly", "~> 0.0.9"
+gem 'yummly'
 
 # Use unicorn as the app server
 # gem 'unicorn'
