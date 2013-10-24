@@ -52,10 +52,14 @@ class UsersController < ApplicationController
     # retrieve food meeting algo & allergies
     # api_call
 
-    10.times { get_food_recommendation }
+    # 10.times { get_food_recommendation }
 
     # add appropriate data to db tables
-    insert_api_call_to_db
+    # insert_api_call_to_db
+
+    api_call
+
+    binding.pry
 
     redirect_to user_path(current_user)
   end
