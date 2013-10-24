@@ -49,7 +49,7 @@ module UsersHelper
     !food["ingredients"].any? { |ing| meat.include?(ing) }
   end
 
-  def vege_food
+  def generate_vege_food
     generate_food
 
     until is_food_vege?(@food)
