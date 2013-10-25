@@ -11,9 +11,9 @@ module UsersHelper
 
   # get api data ####################################
 
-  def food_in_db?(food)
-    PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == food.name.downcase }
-  end  
+  # def food_in_db?(food)
+  #   PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == food.name.downcase }
+  # end  
 
   # def api_call
   # end
@@ -135,17 +135,25 @@ module UsersHelper
     current_user.playlist_foods << food
   end
 
-  def ingredient_in_db?(ingredient)
-    Ingredient.all.any? { |ing| ing.name.downcase == ingredient.downcase }
+  # def ingredient_in_db?(ingredient)
+  #   Ingredient.all.any? { |ing| ing.name.downcase == ingredient.downcase }
+  # end
+
+  def user_has_ingredient?(ingredient)
+    current_user.ingredients.include?(ingredient)
   end
 
-  def insert_ingredients_into_db(ingredients_array)
-    ingredients_array.each do |ing|
-      Ingredient.create(name: ing.downcase) unless ingredient_in_db?(ing)
-      # establish user relation
-      current_user.ingredients << ing
-    end
+  def add_to_user_ingredients(ingredient)
+    current_user.ingredients << ingredient
   end
+
+  # def insert_ingredients_into_db(ingredients_array)
+  #   ingredients_array.each do |ing|
+  #     Ingredient.create(name: ing.downcase) unless ingredient_in_db?(ing)
+  #     # establish user relation
+  #     add_to_user_ingredients(ing)
+  #   end
+  # end
 
   ###################################################
 

@@ -48,6 +48,13 @@ class UsersController < ApplicationController
   end
 
   def generate_recommendation
+    generate_food
+
+    add_to_user_foodlist(@food)
+
+    @food.ingredients.each do |ing|
+      add_to_user_ingredients(ing) unless user_has_ingredient?(ing)
+    end
 
     redirect_to user_path(current_user)
   end
