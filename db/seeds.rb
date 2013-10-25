@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'yummly'
 
 def food_in_db?(food)
   PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == food.name.downcase }
@@ -18,8 +19,7 @@ response = Yummly.search("main", maxResult: 500, start: 1)
 
 response.each do |recipe|
   unless food_in_db?(recipe)
-    @food = PlaylistFood.create(name: recipe.name)
-    @food.image_url = recipe.thumbnail unless recipe.thumbnail.nil?
+    @food = PlaylistFood.create(name: recipe.name, image_url: recipe.thumbnail)
   end
 
   recipe.ingredients.each do |ing|
