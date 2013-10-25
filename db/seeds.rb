@@ -5,7 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-require 'yummly'
 
 def food_in_db?(food)
   PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == food.name.downcase }
@@ -15,7 +14,7 @@ def ingredient_in_db?(ingredient)
   Ingredient.all.any? { |ing| ing.name.downcase == ingredient.downcase }
 end
 
-response = Yummly.search("main", maxResult: 500, start: 1)
+response = Yummly.search(" ", maxResult: 400, start: 678)
 
 response.each do |recipe|
   unless food_in_db?(recipe)
