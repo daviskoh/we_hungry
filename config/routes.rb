@@ -1,4 +1,6 @@
 WeHungry::Application.routes.draw do
+  root to: 'sessions#new'
+
   # doesnt make sense showing all users on page
   resources :users, except: [:index] do
     member do
