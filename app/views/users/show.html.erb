@@ -1,7 +1,7 @@
 <!-- put div inside link_to -->
 <%= link_to "Generate Food", generate_recommendation_user_path, id: "generate" %>
 
-<h1>Your Recommendations:</h1>
+<h1 id="reco_title">Your Recommendations:</h1>
 
 <ul>
   <% @user.playlist_foods.each do |food| %>
