@@ -36,8 +36,7 @@ module UsersHelper
   end
 
   def make_concise(word)
-    @result = word.sub(word[-28..-1],"...")
-    @result
+    result = word.sub(word[-28..-1],"...")
   end
 
   # def name_too_long
