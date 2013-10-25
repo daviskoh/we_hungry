@@ -24,9 +24,10 @@ response.each do |recipe|
 
   recipe.ingredients.each do |ing|
     unless ingredient_in_db?(ing)
-      ingredient = Ingredient.create(name: ing)
-      PlaylistFood.last.ingredients << ingredient
+      Ingredient.create(name: ing)
     end
+
+    PlaylistFood.last.ingredients << Ingredient.find_by(name: ing)
   end
 end
 

@@ -9,7 +9,9 @@ class PlaylistFoodsController < ApplicationController
     get_user_and_food
 
     @pair[:user]
-    @pair[:playlist_food]
+    @pair[:playlist_food].ingredients.each do |ing|
+      IngredientsUsers.where("")
+    end
   end
 
   def dislike
