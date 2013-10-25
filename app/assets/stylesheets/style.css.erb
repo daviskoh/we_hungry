@@ -1,8 +1,8 @@
 body {
   background-color: rgb(95%,95%,95%);
 }
-nav {
-  /*background: #CF001D;*/
+.nav {
+  margin-bottom: 4em;
   background: #D60009;
   position: fixed;
   top: 0;
@@ -15,7 +15,6 @@ nav {
   box-shadow: 1px 1px 3px 3px #BABAC4;
   opacity: .8;
 }
-
 nav ul li {
   display: inline-block;
 }
@@ -73,8 +72,8 @@ h1 {
   text-align: center;
   margin-top: 2%;
   margin-left: 20%;
-  margin-bottom: 0px;
-  min-height: 650px;
+  margin-bottom: -30px;
+  min-height: 1000px;
   width: 60%;
   border-left: 2px solid #BABAC4;
   border-right: 2px solid #BABAC4;
@@ -201,13 +200,17 @@ div.rate_button {
     border-style: inset;
   }
 
-form    {
+.ingredient {
+  font-family: Palatino, serif;
+}
+
+form {
   background: -webkit-gradient(linear, bottom, left 175px, from(#CCCCCC), to(#EEEEEE));
   background: -moz-linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);
   margin:auto;
   position:relative;
   width:550px;
-  height:450px;
+  height:200px;
   font-family: Tahoma, Geneva, sans-serif;
   font-size: 14px;
   font-style: italic;
@@ -232,10 +235,12 @@ footer {
   bottom: 0;
   left: 0;
   margin-top: 0px;
-  width: 100%;
+  width: 101.5%;
+  margin-left: -10px;
   min-height: 50px;
   text-align: center;
   border-radius: 10px 10px 0px 0px;
+  margin-bottom: -200px;
 }
   span {
     color: white;

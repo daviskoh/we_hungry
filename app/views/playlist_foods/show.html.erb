@@ -1,8 +1,7 @@
 <h1><%= normalize(@food.name) %></h1>
-<h2>Ingredients:</h2>
 <% @food.ingredients.each do |ing| %>
   <ul>
-    <li><%= ing.name %></li>
+    <li class="ingredient"><%= ing.name %></li>
   </ul>
 <% end %>
 
