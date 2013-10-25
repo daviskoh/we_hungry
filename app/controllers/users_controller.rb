@@ -48,19 +48,6 @@ class UsersController < ApplicationController
   end
 
   def generate_recommendation
-    # retrieve food meeting algo & allergies
-    # api_call
-
-    # 10.times { get_food_recommendation }
-
-    # add appropriate data to db tables
-    # insert_api_call_to_db
-
-    # generate_vege_food
-    # binding.pry
-
-    # insert_food_into_db(@food)
-    api_call
 
     redirect_to user_path(current_user)
   end

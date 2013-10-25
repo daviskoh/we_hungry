@@ -3,6 +3,7 @@ module UsersHelper
 
   # def normalize_name
     # implement on recipe names & ingredient names
+    # right before display
   # def name_too_long
     # implement for display in User show page
 
@@ -21,36 +22,32 @@ module UsersHelper
 
   ###################################################
 
-  # basic connect to api & retrieve basic food ######
+  # get api data ####################################
 
-  def api_call
-    # search_term = current_user.
-    # search = "main" # "Bourbon and Ginger".gsub(" ", "+")
-    # max_result = 10000
-    # api_id = "9666efa3"
-    # api_key = "0173cf5aebdb452af9af01120ff44b4f"
-    Yummly.search("main", maxResult: 15)
-    # @foods = response["matches"]
-    # @food = @foods.sample
-    binding.pry
-    # @ingredients = @food["ingredients"].map { |ingredient| ingredient.downcase }
+  # def food_in_db?(food)
+  #   PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == @food["recipeName"].downcase }
+  # end  
 
-    # @food
-  end
+  # def api_call
+  # end
 
-  def food_in_db?(food)
-    PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == @food["recipeName"].downcase }
-  end  
+  # def get_food_from_api
+  #   api_call
 
-  def get_food_from_api
-    api_call
+  #   # generates unique food not already in PlaylistFood
+  #   while food_in_db?(@food)
+  #     api_call
+  #   end
 
-    # generates unique food not already in PlaylistFood
-    while food_in_db?(@food)
-      api_call
-    end
+  #   @food
+  # end
 
-    @food
+  ###################################################
+
+  # get food ########################################
+
+  def pull_food_from_db
+    @food = PlaylistFood.all.sample
   end
 
   ###################################################
@@ -63,7 +60,7 @@ module UsersHelper
     !food["ingredients"].any? { |ing| meat.include?(ing) }
   end
 
-  def food_meet_lactose?(food)
+  def is_dairy_free?(food)
     dairy = ["Acidophilus Milk", "Ammonium Caseinate", "Butter", "Butter Fat", "Butter Oil", "Butter Solids", "Buttermilk", "Buttermilk Powder", "Calcium Caseinate", "Casein", "Caseinate (in general)", "Cheese (All animal-based)", "Condensed Milk", "Cottage Cheese", "Cream", "Curds", "Custard", "Delactosed Whey", "Demineralized Whey", "Dry Milk Powder", "Dry Milk Solids", "Evaporated Milk", "Ghee", "Goat Milk", "Half & Half", "Hydrolyzed Casein", "Hydrolyzed Milk Protein", "Iron Caseinate", "Lactalbumin", "Lactoferrin", "Lactoglobulin", "Lactose", "Lactulose", "Low-Fat Milk", "Magnesium Caseinate", "Malted Milk", "Milk", "Milk Derivative", "Milk Fat", "Milk Powder", "Milk Protein", "Milk Solids", "Natural Butter Flavor", "Nonfat Milk", "Nougat", "Paneer", "Potassium Caseinate", "Pudding", "Recaldent", "Rennet Casein", "Skim Milk", "Sodium Caseinate", "Sour Cream", "Sour Milk Solids", "Sweetened Condensed Milk", "Sweet Whey", "Whey", "Whey Powder", "Whey Protein Concentrate", "Whey Protein Hydrolysate", "Whipped Cream", "Whipped Topping", "Whole Milk", "Yogurt", "Zinc Caseinate"].map! { |i| i.downcase }
 
     !food["ingredients"].any? { |ing| dairy.include?(ing) }
@@ -77,7 +74,7 @@ module UsersHelper
     !food["ingredients"].any? { |ing| forbidden.include?(ing) }
   end
 
-  def food_meet_nut?(food)
+  def is_nutless?(food)
     nuts = ["chestnut", "chestnuts", "pinenut", "pinenuts", "Almonds", "Almond", "Brazil Nuts", "Brazil Nuts", "Cacao", "Cashews", "Cashew", "Chestnuts", "Coconut", "Coconuts", "Hazelnuts", "Hazelnut", "Macadamia Nuts", "Macadamia", "Mixed Nuts", "Peanuts", "Peanut", "Pecans", "Pecan", "Pine Nuts", "Pine Nut", "Pistachios", "Pistachio", "Soy Nuts", "Soy Nut", "Sunflower Seeds", "Sunflower Seed", "Walnuts", "Walnut", "Raw Nuts", "Raw Nuts", "Organic Nuts", "Roasted Nuts", "Salted Nuts", "Seasoned Nuts", "Unsalted Nuts", "Pili Nuts", "Nut Butter", "Bulk Nuts", "Black Walnut", "Black Walnuts", "nut", "nuts" ].map! { |i| i.downcase }
 
     !food["ingredients"].any? { |ing| nuts.include?(ing) }
@@ -88,19 +85,23 @@ module UsersHelper
   # generate food meeting restrictions ##############
 
   def get_vegan_food
-    get_food_from_api until is_food_vege?(@food)
+    # get_food_from_api until is_food_vege?(@food)
+    pull_food_from_db until is_food_vege?(@food)
   end
 
-  def get_milkless_food
-    get_food_from_api until food_meet_lactoselactose?(@food)
+  def get_dairy_free_food
+    # get_food_from_api until is_dairy_free?(@food)
+    pull_food_from_db until is_dairy_free?(@food)
   end
 
   def get_vegan_food
-    get_food_from_api until is_food_vegan?(@food)
+    # get_food_from_api until is_food_vegan?(@food)
+    pull_food_from_db until is_food_vegan?(@food)
   end
 
   def get_nutless_food
-    get_food_from_api until food_meet_nut?(@food)
+    # get_food_from_api until is_nutless?(@food)
+    pull_food_from_db until is_nutless?(@food)
   end
 
   ###################################################  
@@ -115,9 +116,10 @@ module UsersHelper
     elsif current_user.vegan
       get_vegan_food
     elsif current_user.nut
-      get get_nutless_food
+      get_nutless_food
     else
-      get_food_from_api
+      # get_food_from_api
+      pull_food_from_db
     end
   end
 
@@ -125,30 +127,25 @@ module UsersHelper
 
   # database insertion ###############################
 
-  def insert_food_into_db(food)
+  def add_to_user_foodlist(food)
     # create playlist_food
-    playlist_food = PlaylistFood.create(name: food["recipeName"], image_url: food["smallImageUrls"].first)
+    # playlist_food = PlaylistFood.create(name: food["recipeName"], image_url: food["smallImageUrls"].first)
 
     # establish playlist_food user relation
-    current_user.playlist_foods << playlist_food
+    current_user.playlist_foods << food
   end
 
-  def ingredients_in_db?(ingredients_array)
-    Ingredient.all.any? { |ing| ingredients_array.include?(ing.name) }
+  def ingredient_in_db?(ingredient)
+    Ingredient.all.include? { |ing| ing.name == ingredient }
   end
 
-  # def insert_ingredients_into_db(ingredients_array)
-  #   # check if ingredient exist already
-  #   unless ingredient_in_db?(ingredients_array)
-  #     # if unique, create each ingredient in array
-  #     ingredients_array.each do { |ing| Ingredient.create(name: ing.downcase) }
-  #       # establish user ingredient relation
-  # -------> HERE
-  #   # if exist already
-  #   else
-  #     nil
-  #   end
-  # end
+  def insert_ingredients_into_db(ingredients_array)
+    ingredients_array.each do |ing|
+      Ingredient.create(name: ing.downcase) unless ingredient_in_db?(ing)
+      # establish user relation
+      current_user.ingredients << ing
+    end
+  end
 
   ###################################################
 
