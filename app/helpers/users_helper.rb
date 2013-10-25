@@ -175,12 +175,12 @@ module UsersHelper
     top_3_ingredients
   end
 
-  def include_preferences?(ingredients_array)
-    ingredients_array.all? { |ing| @food.ingredients.include?(ing) }
+  def include_preferences?(food, ingredients_array)
+    ingredients_array.all? { |ing| food.ingredients.include?(ing) }
   end
 
   def gen_preferred_food
-    generate_food until include_preferences?(get_top_3_ingredients)
+    generate_food until include_preferences?(generate_food, get_top_3_ingredients)
   end
 
   ###################################################
