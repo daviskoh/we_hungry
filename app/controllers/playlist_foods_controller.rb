@@ -12,7 +12,6 @@ class PlaylistFoodsController < ApplicationController
       relation = IngredientsUsers.where(user_id: current_user.id, ingredient_id: ing.id)[0]
       relation.pos_votes += 1
       relation.tot_votes += 1
-      binding.pry
     end
 
     PlaylistFoodsUsers.where(user_id: current_user.id, playlist_food_id: @food.id)[0].destroy
@@ -21,12 +20,17 @@ class PlaylistFoodsController < ApplicationController
   end
 
   def dislike
-    get_user_and_food
-    # currently: playlist_food, ingredients,
-    # playlist_food_ingredient,
-    # ingredient_user
+   get_food_info
 
-    # dislike playlist_food_user
+    @food.ingredients.each do |ing|
+      relation = IngredientsUsers.where(user_id: current_user.id, ingredient_id: ing.id)[0]
+      relation.pos_votes -= 1 unless relation.pos_votes == 0
+      relation.tot_votes += 1
+    end
+
+    PlaylistFoodsUsers.where(user_id: current_user.id, playlist_food_id: @food.id)[0].destroy
+
+    redirect_to user_path(current_user)
   end
 
   def get_food_info
