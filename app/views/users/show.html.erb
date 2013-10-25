@@ -9,7 +9,7 @@
     <div class="food">
       <li>
         <!-- unless food has been disliked or nil???? -->
-          <div class="food_link"><%= link_to food.name, user_playlist_food_path(current_user, food.id), class: "food_specific" %></div>
+          <div class="food_link"><%= link_to normalize(food.name), user_playlist_food_path(current_user, food.id), class: "food_specific" %></div>
           <div class="rate_buttons">
             <!-- Like Button -->
             <div class="thumbs_up"><%= link_to image_tag("http://images.wikia.com/candy-crush-saga/images/7/7e/Thumbs-up-icon.png", class: "thumbs_up"), like_user_playlist_food_path(current_user, food.id), method: "put" %></div>

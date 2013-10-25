@@ -1,9 +1,28 @@
 module UsersHelper
-  # notes ###########################################
 
-  # def normalize_name
-    # implement on recipe names & ingredient names
-    # right before display
+  # make easier to read for users ##################
+
+  def normalize(food_name)
+    unnecessary_words = ["book", "cookbook", "master", "fresh", "thanksgiving", "die", "addictive", "holiday", "oven", "homemade", "fast", "like", "stovetop", "perfect", "special", "fiesta", "best", "basic", "carpet", "simple", "friday", "night", "how", "make", "the", "crust", "crustless", "recipe", "really", "two", "three", "four", "world\'s", "last-minute", "minute", "minutes", "1-2-3", "cook", "lunch", "breakfast", "dinner", "tonight", "emeril\'s", "awesome", "awesomely", "easy", ",", ":", "you", "will", "ever", "last", "for", "need", ".", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "in minutes", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"].map! { |l| l.downcase }
+
+    food_data = food_name.downcase
+
+    # remove unnecessary words
+    unnecessary_words.each do |word|
+      food_data.gsub!(word, "")
+    end
+
+    # if name begin with "and", remove
+    if food_data.split(" ")[0] == "and"
+      food_data.sub!("and", "")
+    end
+
+    # regex, remove awkward whitespace then capitalize
+    food = food_data.gsub(/\s{2,}/, " ").strip.capitalize
+
+    food
+  end
+
   # def name_too_long
     # implement for display in User show page
 

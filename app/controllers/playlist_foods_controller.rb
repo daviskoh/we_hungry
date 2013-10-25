@@ -1,4 +1,6 @@
 class PlaylistFoodsController < ApplicationController
+  include UsersHelper
+  
   def show
     @food = PlaylistFood.find(params[:id])
   end
