@@ -10,9 +10,14 @@
   <nav>
       <ul>
         <% if logged_in? %>
-          <li><%= link_to 'Profile', user_path(current_user), class: "nav_button", :method => :get %></li>
-          <li><%= link_to 'Edit', edit_user_path, class: "nav_button", :method => :get %></li>
-          <li><%= link_to 'Logout', session_path, class: "logout", :method => :delete %></li>
+          <div class="nav_left">
+            <li><%= link_to 'Profile', user_path(current_user), class: "nav_button", :method => :get %></li>
+            <li><%= link_to 'Edit', edit_user_path, class: "nav_button", :method => :get %></li>
+          </div>
+          <div class="nav_right">
+            <li><%= "Hello, " + current_user.email + "!" %></li>
+            <li><%= link_to 'Logout', session_path, class: "logout", :method => :delete %></li>
+          </div>
         <% else %>
           <li><%= link_to 'Sign Up', new_user_path, class: "nav_button", :method => :get %></li>
           <li><%= link_to 'Login', new_session_path, class: "nav_button", :method => :get %></li>

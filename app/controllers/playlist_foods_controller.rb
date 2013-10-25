@@ -1,6 +1,6 @@
 class PlaylistFoodsController < ApplicationController
   include UsersHelper
-  
+
   def show
     @food = PlaylistFood.find(params[:id])
   end
@@ -9,6 +9,7 @@ class PlaylistFoodsController < ApplicationController
     get_user_and_food
 
     @pair[:user]
+    @pair[:playlist_food]
   end
 
   def dislike

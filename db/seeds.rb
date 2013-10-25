@@ -19,13 +19,14 @@ response = Yummly.search("main", maxResult: 500, start: 414)
 response.each do |recipe|
 
   unless food_in_db?(recipe)
-    food = PlaylistFood.create(name: recipe.name)
-    food.image_url = recipe.thumbnail unless recipe.thumbnail.nil?
+    @food = PlaylistFood.create(name: recipe.name)
+    @food.image_url = recipe.thumbnail unless recipe.thumbnail.nil?
   end
 
   recipe.ingredients.each do |ing|
     unless ingredient_in_db?(ing)
       Ingredient.create(name: ing)
+      @food.ingredients << ing
     end
   end
 end
