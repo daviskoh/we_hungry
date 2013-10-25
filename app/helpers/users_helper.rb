@@ -9,24 +9,11 @@ module UsersHelper
 
   ###################################################
 
-  # use to rank ingredients #######################
-
-  def ci_lower_bound(pos, n, confidence)
-    if n == 0
-        return 0
-    end
-    z = Statistics2.pnormaldist(1-(1-confidence)/2)
-    phat = 1.0*pos/n
-    (phat + z*z/(2*n) - z * Math.sqrt((phat*(1-phat)+z*z/(4*n))/n))/(1+z*z/n)
-  end
-
-  ###################################################
-
   # get api data ####################################
 
-  # def food_in_db?(food)
-  #   PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == @food["recipeName"].downcase }
-  # end  
+  def food_in_db?(food)
+    PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == food.name.downcase }
+  end  
 
   # def api_call
   # end
@@ -106,6 +93,19 @@ module UsersHelper
 
   ###################################################  
 
+  # use to rank ingredients #######################
+
+  def ci_lower_bound(pos, n, confidence)
+    if n == 0
+        return 0
+    end
+    z = Statistics2.pnormaldist(1-(1-confidence)/2)
+    phat = 1.0*pos/n
+    (phat + z*z/(2*n) - z * Math.sqrt((phat*(1-phat)+z*z/(4*n))/n))/(1+z*z/n)
+  end
+
+  ###################################################
+
   # generate food ###################################
 
   def generate_food
@@ -136,7 +136,7 @@ module UsersHelper
   end
 
   def ingredient_in_db?(ingredient)
-    Ingredient.all.include? { |ing| ing.name == ingredient }
+    Ingredient.all.any? { |ing| ing.name.downcase == ingredient.downcase }
   end
 
   def insert_ingredients_into_db(ingredients_array)
