@@ -158,6 +158,31 @@ module UsersHelper
     end
   end
 
+  def get_top_3_ingredients
+    sorted = IngredientsUsers.all.sort_by do |relation|
+      ci_lower_bound(relation.pos_votes, relation.tot_votes, 0.95)
+    end
+
+    top_3_ingredients_relation = sorted.reverse[0..2]
+
+    top_3_ingredients = []
+
+    top_3_ingredients_relation.each do |relation|
+      ingredient = Ingredient.find(relation.ingredient_id)
+      top_3_ingredients << ingredient
+    end
+
+    top_3_ingredients
+  end
+
+  def include_preferences?(ingredients_array)
+    ingredients_array.all? { |ing| @food.ingredients.include?(ing) }
+  end
+
+  def gen_preferred_food
+    generate_food until include_preferences?()
+  end
+
   ###################################################
 
   # database insertion ###############################
@@ -178,9 +203,9 @@ module UsersHelper
     current_user.ingredients.include?(ingredient)
   end
 
-  # def food_has_ingredient?(food, ingredient)
-  #   food.ingredients.include?(ingredient)
-  # end
+  def food_has_ingredient?(food, ingredient)
+    food.ingredients.include?(ingredient)
+  end
 
   def add_to_user_ingredients(ingredient)
     current_user.ingredients << ingredient
