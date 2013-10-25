@@ -35,6 +35,11 @@ module UsersHelper
     better_capitalize(food)
   end
 
+  def make_concise(word)
+    @result = word.sub(word[-28..-1],"...")
+    @result
+  end
+
   # def name_too_long
     # implement for display in User show page
 
@@ -163,16 +168,16 @@ module UsersHelper
       ci_lower_bound(relation.pos_votes, relation.tot_votes, 0.95)
     end
 
-    top_3_ingredients_relation = sorted.reverse[0..2]
+    top_2_ingredients_relation = sorted.reverse[0..1]
 
-    top_3_ingredients = []
+    top_2_ingredients = []
 
-    top_3_ingredients_relation.each do |relation|
+    top_2_ingredients_relation.each do |relation|
       ingredient = Ingredient.find(relation.ingredient_id)
-      top_3_ingredients << ingredient
+      top_2_ingredients << ingredient
     end
 
-    top_3_ingredients
+    top_2_ingredients
   end
 
   def include_preferences?(food, ingredients_array)

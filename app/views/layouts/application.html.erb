@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WeHungry</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <title>We Huungry</title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -23,6 +23,7 @@
             <li><%= link_to 'Sign Up', new_user_path, class: "nav_button", :method => :get %></li>
             <li><%= link_to 'Login', new_session_path, class: "nav_button", :method => :get %></li>
           <% end %>
+          <p id="logo">We H<span>uu</span>ngry</p>
         </ul>
     </nav>
   </div>

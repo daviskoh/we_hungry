@@ -1,6 +1,21 @@
 body {
   background-color: rgb(95%,95%,95%);
 }
+
+p#logo {
+  font-family: Zapf Chancery, cursive;
+  font-size: 2em;
+  position: fixed;
+  color: #FFFFFF;
+  top: -24px;
+  left: 44%;
+  opacity: 1;
+  color: #01FDFD;
+}
+span {
+  font-family: Times, sans-serif;
+}
+
 .nav {
   margin-bottom: 4em;
   background: #D60009;
@@ -8,12 +23,13 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 7%;
+  min-height: 9%;
   border-radius: 0px 0px 10px 10px;
   -moz-box-shadow: 1px 1px 3px 2px #BABAC4;
   -webkit-box-shadow: 1px 1px 5px 3px #BABAC4;
   box-shadow: 1px 1px 3px 3px #BABAC4;
   opacity: .8;
+  z-index: 2;
 }
 nav ul li {
   display: inline-block;
@@ -38,7 +54,12 @@ nav ul li {
 h1 {
   font-family: Gill Sans, sans-serif;
   color: #D60009;
-  margin-top: 2em;
+  margin-top: 2.3em;
+  position: relative;
+  top: 2.5em;
+  border-top: 2px solid #BABAC4;
+  border-radius: 2em;
+  padding-top: 2.2em;
 }
 
 .nav_left {
@@ -70,13 +91,15 @@ h1 {
 #content {
   background-color: #FFFFFF;
   text-align: center;
-  margin-top: 2%;
+  margin-top: 0;
   margin-left: 20%;
   margin-bottom: -30px;
   min-height: 1000px;
   width: 60%;
   border-left: 2px solid #BABAC4;
   border-right: 2px solid #BABAC4;
+  position: relative;
+  top: 50px;
 }
 
 ul {
@@ -86,11 +109,15 @@ ul {
 .edit {
   /*width: 100px;*/
   text-decoration: none;
-  color: #36BEE6;
-  border: 2px solid #01FFFF;
+  color: #000000;
+  border: 2px solid rgb(90%,90%,90%);
   border-radius: 10px;
   padding: 5px;
   background-color: #CF001D;
+  position: relative;
+  top: 20px;
+  z-index: 1;
+  text-align: left;
 }
   .edit:hover {
     color: #01FDFD;
@@ -103,17 +130,19 @@ ul {
 /*adjust size of button*/
 a#generate {
   font-family: Comic Sans, Comic Sans MS, cursive;
-  font-size: 2.5em;
+  font-size: 3em;
   font-variant: small-caps;
   background: #CF001D;
   width: 70%;
-  margin-top: 1000000px;
   text-decoration: none;
   color: #FFFFFF;
   border: 4px solid rgb(90%,90%,90%);
   border-radius: 1em;
   padding: .5em;
+  position: relative;
+  top: 80px;
 }
+
   #generate:hover {
     color: #01FDFD;
     /*background-color: #F31749;*/
@@ -133,12 +162,19 @@ div.food {
   background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 56%,rgba(255,255,255,1) 96%,rgba(246,246,246,1) 100%); /* IE10+ */
   background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 56%,rgba(255,255,255,1) 96%,rgba(246,246,246,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
+
+  -moz-box-shadow: 1px 1px 3px 2px #BABAC4;
+  -webkit-box-shadow: 1px 1px 5px 3px #BABAC4;
+  box-shadow: 1px 1px 3px 3px #BABAC4;
   
   width: 40%;
   margin-left: 27%;
 
   margin-right: 2em;
   border-radius: .5em;
+
+  position: relative;
+  top: 8em;
 }
 a.food_specific {
   font-family: Zapf Chancery, cursive;
@@ -202,6 +238,7 @@ div.rate_button {
 
 .ingredient {
   font-family: Palatino, serif;
+  top: 30px;
 }
 
 h1.signup {
@@ -212,7 +249,7 @@ form {
   background: -webkit-gradient(linear, bottom, left 175px, from(#CCCCCC), to(#EEEEEE));
   background: -moz-linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);
   margin:auto;
-  margin-top: 10%;
+  top: 8em;
   position:relative;
   width:550px;
   height:200px;
@@ -246,6 +283,8 @@ footer {
   text-align: center;
   border-radius: 10px 10px 0px 0px;
   margin-bottom: -200px;
+  position: relative;
+  bottom: -20;
 }
   span {
     color: white;
