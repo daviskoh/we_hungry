@@ -48,6 +48,7 @@ class UsersController < ApplicationController
   end
 
   def generate_recommendation
+    binding.pry
     generate_food
 
     add_to_user_foodlist(@food)

@@ -12,6 +12,7 @@ class PlaylistFoodsController < ApplicationController
       relation = IngredientsUsers.where(user_id: current_user.id, ingredient_id: ing.id)[0]
       relation.pos_votes += 1
       relation.tot_votes += 1
+      relation.save
     end
 
     PlaylistFoodsUsers.where(user_id: current_user.id, playlist_food_id: @food.id)[0].destroy
