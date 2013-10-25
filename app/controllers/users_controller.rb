@@ -12,19 +12,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-
-    # user successfully create
-    if @user.save
-      
-      # when new user, provide foods to init pref ranking
-      generate_food
-
-      add_to_user_foodlist(@food)
-
-      @food.ingredients.each do |ing|
-        add_to_user_ingredients(ing) unless user_has_ingredient?(ing)
-      end
+      @user = User.new(user_params)
 
       redirect_to user_path(@user)
     # return to signup page
