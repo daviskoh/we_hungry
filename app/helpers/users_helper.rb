@@ -180,7 +180,7 @@ module UsersHelper
   end
 
   def gen_preferred_food
-    generate_food until include_preferences?()
+    generate_food until include_preferences?(get_top_3_ingredients)
   end
 
   ###################################################
