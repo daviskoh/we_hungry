@@ -14,7 +14,7 @@ def ingredient_in_db?(ingredient)
   Ingredient.all.any? { |ing| ing.name.downcase == ingredient.downcase }
 end  
 
-response = Yummly.search("main", maxResult: 500, start: 414)
+response = Yummly.search("main", maxResult: 500, start: 1)
 
 response.each do |recipe|
 
