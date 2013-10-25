@@ -174,6 +174,10 @@ module UsersHelper
     current_user.ingredients.include?(ingredient)
   end
 
+  # def food_has_ingredient?(food, ingredient)
+  #   food.ingredients.include?(ingredient)
+  # end
+
   def add_to_user_ingredients(ingredient)
     current_user.ingredients << ingredient
   end

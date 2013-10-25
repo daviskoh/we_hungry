@@ -12,12 +12,11 @@ end
 
 def ingredient_in_db?(ingredient)
   Ingredient.all.any? { |ing| ing.name.downcase == ingredient.downcase }
-end  
+end
 
 response = Yummly.search("main", maxResult: 500, start: 1)
 
 response.each do |recipe|
-
   unless food_in_db?(recipe)
     @food = PlaylistFood.create(name: recipe.name)
     @food.image_url = recipe.thumbnail unless recipe.thumbnail.nil?
@@ -25,8 +24,8 @@ response.each do |recipe|
 
   recipe.ingredients.each do |ing|
     unless ingredient_in_db?(ing)
-      Ingredient.create(name: ing)
-      @food.ingredients << ing
+      ingredient = Ingredient.create(name: ing)
+      PlaylistFood.last.ingredients << ingredient
     end
   end
 end
