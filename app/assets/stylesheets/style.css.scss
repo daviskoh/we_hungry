@@ -1,8 +1,14 @@
-/*variables*/
+/* #Variables ***************************************************/
 $primary-color: #D60009;
 $shadow-color: #BABAC4;
 
-/*mixins*/
+/* #Mixins ********************************************************/
+@mixin primary-hover {
+  &:hover {
+    color: #01FDFD;
+    background-color: #F31749;
+  }
+}
 @mixin primary-active {
   &:active {
     border-style: inset;
@@ -13,6 +19,26 @@ $shadow-color: #BABAC4;
   -webkit-box-shadow: 1px 1px 5px 3px $shadow-color;
   box-shadow: 1px 1px 3px 3px $shadow-color;
 }
+@mixin border-radius {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+@mixin rate-button($color) {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: inline-block;
+  border: 1.5px solid $color;
+  border-style: outset;
+
+  &:hover {
+    background-color: lighten($color, 50%);
+  }
+  @include primary-active;
+}
+
+/******************************************************************/
 
 body {
   background-color: rgb(95%,95%,95%);
@@ -55,17 +81,11 @@ nav ul li {
   text-decoration: none;
   color: #000000;
   border: 2px solid rgb(85%,85%,85%);
-  border-radius: 10px;
+  @include border-radius;
   padding: 5px;
 
-  &:hover {
-    color: #01FDFD;
-    background-color: #F31749;
-
-  }
-  &:active {
-    border-style: inset;
-  }
+  @include primary-hover;
+  @include primary-active;
 }
 
 h1#reco_title {
@@ -91,16 +111,12 @@ h1#reco_title {
 .logout {
   /*fix later for screen size*/
   /*margin-left: 1600%;*/
-  text-decoration: none;
-  color: #000000;
   border: 2px solid rgb(85%,85%,85%);
-  border-radius: 10px;
+  @include border-radius;
   padding: 5px;
 
-  &:hover {
-    color: #01FDFD;
-    background-color: #F31749;
-  }
+  @include primary-hover;
+  @include primary-active;
 }
 
 #content {
@@ -125,21 +141,15 @@ ul {
   text-decoration: none;
   color: #000000;
   border: 2px solid rgb(90%,90%,90%);
-  border-radius: 10px;
+  @include border-radius;
   padding: 5px;
   background-color: $primary-color;
   text-align: left;
   position: relative;
   top: 20px;
 
-  &:hover {
-    color: #01FDFD;
-    background-color: #F31749;
-
-  }
-  &:active {
-    border-style: inset;
-  }
+  @include primary-hover;
+  @include primary-active;
 }
 
 /*adjust size of button*/
@@ -161,9 +171,7 @@ a#generate {
     color: #01FDFD;
     border: 4px solid #FFFFFF;
   }
-  &:active {
-    border-style: inset;
-  }
+  @include primary-active;
 }
 
 .food {
@@ -199,9 +207,7 @@ a.food_specific {
   margin-bottom: 10px;
   display: block;
   margin-left: 32.3%;
-}
 
-.img {
   @include primary-box-shadow;
   width: 100px;
   height: 60px;
@@ -212,45 +218,14 @@ a.food_specific {
   box-shadow: 1px 1px 5px 5px $shadow-color;
 
   }
-  &:active {
-    border-style: inset;
-  }
-}
-
-div.rate_button {
-  margin-top: 100px;
-  float: right;
-  right: 0;
+  @include primary-active;
 }
 
 .thumbs_up {
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  display: inline-block;
-  border: 1.5px solid #11772D;
-  border-style: outset;
-
-  &:hover {
-    background-color: #7DF481;
-  }
-  &:active {
-    border-style: inset;
-  }
+  @include rate-button(#11772D);
 }
 .thumbs_down {
-  width: 50px;
-  height: 50px; 
-  border-radius: 100%;
-  display: inline-block;
-  border: 1.5px solid #92040E;
-
-  &:hover {
-    background-color: #FF9B8D;
-  }
-  &:active {
-    border-style: inset;
-  }
+  @include rate-button(#92040E);
 }
 
 .ingredient {
@@ -271,9 +246,7 @@ form {
   font-weight: bold;
   color: #09C;
   text-decoration: none;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+  
   padding:10px;
   border: 1px solid #999;
   border: inset 1px solid #333;

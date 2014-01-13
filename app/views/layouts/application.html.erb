@@ -22,7 +22,7 @@
             </div>
             <div class="nav_right">
               <li><%= "Hello, " + current_user.email + "!" %></li>
-              <li><%= link_to 'Logout', session_path, class: "logout", :method => :delete %></li>
+              <li><%= link_to 'Logout', session_path, class: "logout nav_button", :method => :delete %></li>
             </div>
           <% else %>
             <li><%= link_to 'Sign Up', new_user_path, class: "nav_button", :method => :get %></li>

@@ -9,7 +9,7 @@
   <% @reco_list.each do |food| %>
     <li class='food'>
       <%= link_to normalize(food.name), user_playlist_food_path(current_user, food.id), class: "food_specific" %>
-      <%= link_to image_tag(food.image_url, class: "img food_image"), user_playlist_food_path(current_user, food.id) %>
+      <%= link_to image_tag(food.image_url, class: "food_image"), user_playlist_food_path(current_user, food.id) %>
       <!-- Like Button -->
       <%= link_to image_tag("http://images.wikia.com/candy-crush-saga/images/7/7e/Thumbs-up-icon.png", class: "thumbs_up"), like_user_playlist_food_path(current_user, food.id), method: "put" %>
       <!-- Dislike Button -->
