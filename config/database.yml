@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: we_hungry_test
   pool: 5
-  username: we_hungry
+  username: daviskoh
   password:
 
 production:
@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: we_hungry_production
   pool: 5
-  username: we_hungry
+  username: daviskoh
   password:

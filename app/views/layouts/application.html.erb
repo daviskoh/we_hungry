@@ -6,6 +6,11 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+
+<% if logged_in? %>
+  <script>var sessionID = <%= session[:user_id] %></script>
+<% end %>
+
 <body>
   <div class="nav">
     <nav>
