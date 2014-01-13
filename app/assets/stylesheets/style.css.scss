@@ -1,5 +1,26 @@
+/*variables*/
+$primary-color: #D60009;
+$shadow-color: #BABAC4;
+
+/*mixins*/
+@mixin primary-active {
+  &:active {
+    border-style: inset;
+  }
+}
+@mixin primary-box-shadow {
+  -moz-box-shadow: 1px 1px 3px 2px $shadow-color;
+  -webkit-box-shadow: 1px 1px 5px 3px $shadow-color;
+  box-shadow: 1px 1px 3px 3px $shadow-color;
+}
+
 body {
   background-color: rgb(95%,95%,95%);
+}
+
+span {
+  font-family: Times, sans-serif;
+  color: white;
 }
 
 p#logo {
@@ -12,22 +33,17 @@ p#logo {
   opacity: 1;
   color: #01FDFD;
 }
-span {
-  font-family: Times, sans-serif;
-}
 
 .nav {
   margin-bottom: 4em;
-  background: #D60009;
+  background: $primary-color;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   min-height: 9%;
   border-radius: 0px 0px 10px 10px;
-  -moz-box-shadow: 1px 1px 3px 2px #BABAC4;
-  -webkit-box-shadow: 1px 1px 5px 3px #BABAC4;
-  box-shadow: 1px 1px 3px 3px #BABAC4;
+  @include primary-box-shadow;
   opacity: .8;
   z-index: 2;
 }
@@ -37,33 +53,30 @@ nav ul li {
 
 .nav_button {
   text-decoration: none;
-  /*color: #36BEE6;*/
   color: #000000;
   border: 2px solid rgb(85%,85%,85%);
   border-radius: 10px;
   padding: 5px;
-}
-.nav_button:hover {
-  color: #01FDFD;
-  background-color: #F31749;
-}
-.nav_button:active {
-  border-style: inset;
+
+  &:hover {
+    color: #01FDFD;
+    background-color: #F31749;
+
+  }
+  &:active {
+    border-style: inset;
+  }
 }
 
 h1#reco_title {
   font-family: Gill Sans, sans-serif;
   font-size: 2.7em;
-  color: #D60009;
-  border-top: 2px solid #BABAC4;
+  color: $primary-color;
+  border-top: 2px solid $shadow-color;
   border-radius: 2em;
   padding-top: 1.5em;
   padding-bottom: 0px;
   margin-top: 170px;
-}
-
-h1 {
-  
 }
 
 .nav_left {
@@ -83,14 +96,12 @@ h1 {
   border: 2px solid rgb(85%,85%,85%);
   border-radius: 10px;
   padding: 5px;
-}
-  .logout:hover {
+
+  &:hover {
     color: #01FDFD;
     background-color: #F31749;
   }
-  .nav_button:active {
-    border-style: inset;
-  }
+}
 
 #content {
   background-color: #FFFFFF;
@@ -100,8 +111,8 @@ h1 {
   margin-bottom: -30px;
   min-height: 1000px;
   width: 60%;
-  border-left: 2px solid #BABAC4;
-  border-right: 2px solid #BABAC4;
+  border-left: 2px solid $shadow-color;
+  border-right: 2px solid $shadow-color;
   position: relative;
   padding-bottom: 20px;
 }
@@ -111,31 +122,32 @@ ul {
 }
 
 .edit {
-  /*width: 100px;*/
   text-decoration: none;
   color: #000000;
   border: 2px solid rgb(90%,90%,90%);
   border-radius: 10px;
   padding: 5px;
-  background-color: #CF001D;
+  background-color: $primary-color;
   text-align: left;
   position: relative;
   top: 20px;
-}
-  .edit:hover {
+
+  &:hover {
     color: #01FDFD;
     background-color: #F31749;
+
   }
-  .edit:active {
+  &:active {
     border-style: inset;
   }
+}
 
 /*adjust size of button*/
 a#generate {
   font-family: Comic Sans, Comic Sans MS, cursive;
   font-size: 3em;
   font-variant: small-caps;
-  background: #CF001D;
+  background: $primary-color;
   width: 70%;
   text-decoration: none;
   color: #FFFFFF;
@@ -144,16 +156,15 @@ a#generate {
   padding: .5em;
   position: relative;
   top: 90px;
-}
 
-  #generate:hover {
+  &:hover {
     color: #01FDFD;
-    /*background-color: #F31749;*/
     border: 4px solid #FFFFFF;
   }
-  #generate:active {
+  &:active {
     border-style: inset;
   }
+}
 
 .food {
   margin-bottom: 2em;
@@ -166,9 +177,7 @@ a#generate {
   background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 56%,rgba(255,255,255,1) 96%,rgba(246,246,246,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
 
-  -moz-box-shadow: 1px 1px 3px 2px #BABAC4;
-  -webkit-box-shadow: 1px 1px 5px 3px #BABAC4;
-  box-shadow: 1px 1px 3px 3px #BABAC4;
+  @include primary-box-shadow;
   
   width: 40%;
   margin-left: 27%;
@@ -193,19 +202,19 @@ a.food_specific {
 }
 
 .img {
-  -moz-box-shadow: 1px 1px 3px 2px #BABAC4;
-  -webkit-box-shadow: 1px 1px 5px 3px #BABAC4;
-  box-shadow: 1px 1px 3px 3px #BABAC4;
+  @include primary-box-shadow;
   width: 100px;
   height: 60px;
-}
-.img:hover {
-  /*-moz-box-shadow: 1px 1px 3px 2px #BABAC4;
-  -webkit-box-shadow: 1px 1px 5px 3px #BABAC4;*/
-  box-shadow: 1px 1px 5px 5px #BABAC4;
-}
-.img:active {
-  border-style: inset;
+
+  &:hover {
+  /*-moz-box-shadow: 1px 1px 3px 2px $shadow-color;
+  -webkit-box-shadow: 1px 1px 5px 3px $shadow-color;*/
+  box-shadow: 1px 1px 5px 5px $shadow-color;
+
+  }
+  &:active {
+    border-style: inset;
+  }
 }
 
 div.rate_button {
@@ -221,34 +230,32 @@ div.rate_button {
   display: inline-block;
   border: 1.5px solid #11772D;
   border-style: outset;
-}
-  .thumbs_up:hover {
+
+  &:hover {
     background-color: #7DF481;
   }
-  .thumbs_up:active {
+  &:active {
     border-style: inset;
   }
+}
 .thumbs_down {
   width: 50px;
   height: 50px; 
   border-radius: 100%;
   display: inline-block;
   border: 1.5px solid #92040E;
-}
-  .thumbs_down:hover {
+
+  &:hover {
     background-color: #FF9B8D;
   }
-  .thumbs_down:active {
+  &:active {
     border-style: inset;
   }
+}
 
 .ingredient {
   font-family: Palatino, serif;
   top: 30px;
-}
-
-h1.signup {
-
 }
 
 form {
@@ -270,13 +277,12 @@ form {
   padding:10px;
   border: 1px solid #999;
   border: inset 1px solid #333;
-  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  
+  @include primary-box-shadow;
 }
 
 footer {
-  background-color: #CF001D;
+  background-color: $primary-color;
   /*position: fixed;*/
   bottom: 0;
   left: 0;
@@ -290,11 +296,9 @@ footer {
   position: relative;
   clear: both;
   margin-bottom: -23px;
-}
-  span {
-    color: white;
-  }
+
   #ga {
     height: .75em;
     width: .75em;
   }
+}
