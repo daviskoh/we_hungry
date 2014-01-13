@@ -2,6 +2,25 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
+  gem 'ffaker'
+end
+
+group :production do 
+  gem 'rails_12factor'
+end
+
+group :test do
+  gem 'nyan-cat-formatter'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'launchy'
+  # gem 'simplecov', require: false
+end
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
