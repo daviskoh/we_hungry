@@ -1,7 +1,7 @@
 var appendFood = function(food) {
   console.log('appending food reco');
 
-  $("<div ></div>")
+  $("<li class='food'></li> ")
 }
 
 $(function() {
@@ -10,7 +10,7 @@ $(function() {
   // attach even listener to #generate button
   // ajax for reco
     // progress bar while loading food
-  // upon success, persist to DB & immediate render
+  // upon success, persist to DB & immediate prepend to list
   $('a#generate').on('click', function(e) {
     e.preventDefault();
 

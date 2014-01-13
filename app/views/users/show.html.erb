@@ -6,7 +6,7 @@
 <h1 id="reco_title">Your Recommendations:</h1>
 
 <ul id='recommendations_list'>
-  <% @user.playlist_foods.each do |food| %>
+  <% @reco_list.each do |food| %>
     <li class='food'>
       <div class="food_link">
         <%= link_to normalize(food.name), user_playlist_food_path(current_user, food.id), class: "food_specific" %>
