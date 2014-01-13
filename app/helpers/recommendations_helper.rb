@@ -1,4 +1,4 @@
-module UsersHelper
+module RecommendationsHelper
 
   # make easier to read for users ##################
 

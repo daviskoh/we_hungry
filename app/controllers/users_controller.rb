@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  include UsersHelper
   # need these before user actions
   # except new & create because initiating
   before_action :authenticated!, :set_user, :authorized!, except: [:new, :create]
@@ -47,16 +46,16 @@ class UsersController < ApplicationController
   end
 
   def generate_recommendation
-    # generate_food 
-    gen_preferred_food
+    # # generate_food 
+    # gen_preferred_food
 
-    add_to_user_foodlist(@food)
+    # add_to_user_foodlist(@food)
 
-    @food.ingredients.each do |ing|
-      add_to_user_ingredients(ing) unless user_has_ingredient?(ing)
-    end
+    # @food.ingredients.each do |ing|
+    #   add_to_user_ingredients(ing) unless user_has_ingredient?(ing)
+    # end
 
-    redirect_to user_path(current_user)
+    # redirect_to user_path(current_user)
   end
 
   # helper methods
