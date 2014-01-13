@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @reco_list = user.playlist_foods.order(created_at: :desc)
+    @reco_list = @user.playlist_foods.order(created_at: :desc)
     render :show
   end
 

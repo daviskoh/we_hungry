@@ -1,7 +1,7 @@
 var appendFood = function(food) {
   console.log('appending food reco');
 
-  $("<li class='food'></li> ")
+  $("<li class='food'></li> ");
 }
 
 $(function() {
