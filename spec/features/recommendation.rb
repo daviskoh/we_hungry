@@ -8,6 +8,6 @@ describe 'food recommendation generator', js: true do
   it 'recommends food' do 
     click_link 'Generate Food'
 
-
+    expect(User.last.playlist_foods.count).to eq(1)
   end
 end
