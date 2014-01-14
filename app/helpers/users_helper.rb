@@ -1,4 +1,6 @@
-module RecommendationsHelper
+module UsersHelper
+  #TODO test normalize method
+  #TODO change to sql
 
   # make easier to read for users ##################
 
@@ -36,7 +38,7 @@ module RecommendationsHelper
   end
 
   def make_concise(word)
-    result = word.sub(word[-28..-1],"...")
+    word.sub(word[-28..-1],"...")
   end
 
   # def name_too_long

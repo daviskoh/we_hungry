@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>We Huungry</title>
+  <link data-turbolinks-track="true" href="/assets/application.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/style.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/welcome.css?body=1" media="all" rel="stylesheet" />
+  <script data-turbolinks-track="true" src="/assets/jquery.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/jquery_ujs.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/turbolinks.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/application.js?body=1"></script>
+  <meta content="authenticity_token" name="csrf-param" />
+<meta content="TzFP0uXqxuS3S0loD/ij7X+Mj88ZgJ3vhx3GcWm4+Pc=" name="csrf-token" />
+</head>
+
+
+<body>
+  <div class="nav">
+    <nav>
+        <ul>
+            <li><a class="nav_button" data-method="get" href="/users/new">Sign Up</a></li>
+            <li><a class="nav_button" data-method="get" href="/session/new">Login</a></li>
+          <p id="logo">We H<span>uu</span>ngry</p>
+        </ul>
+    </nav>
+  </div>
+
+<div id="content">
+  <h1 class="signup">Please Sign Up</h1>
+
+
+<form accept-charset="UTF-8" action="/users" class="new_user" id="new_user" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="TzFP0uXqxuS3S0loD/ij7X+Mj88ZgJ3vhx3GcWm4+Pc=" /></div>
+  <label for="user_email">Email</label>
+  <input id="user_email" name="user[email]" type="email" />
+
+  <label for="user_password">Password</label>
+  <input id="user_password" name="user[password]" type="password" />
+
+  <label for="user_password_confirmation">Password confirmation</label>
+  <input id="user_password_confirmation" name="user[password_confirmation]" type="password" />
+
+  <!-- add allergies -->
+  <label for="user_vegetarian">Vegetarian</label>
+  <input name="user[vege]" type="hidden" value="0" /><input id="user_vege" name="user[vege]" type="checkbox" value="1" />
+
+  <label for="user_vegan">Vegan</label>
+  <input name="user[vegan]" type="hidden" value="0" /><input id="user_vegan" name="user[vegan]" type="checkbox" value="1" />
+
+  <label for="user_dairy">Dairy</label>
+  <input name="user[lactose]" type="hidden" value="0" /><input id="user_lactose" name="user[lactose]" type="checkbox" value="1" />
+
+  <label for="user_nut_allergy">Nut allergy</label>
+  <input name="user[nut]" type="hidden" value="0" /><input id="user_nut" name="user[nut]" type="checkbox" value="1" />
+
+  <input name="commit" type="submit" value="Sign Up" />
+</form>
+</div>
+
+<footer>
+  <p>By Davis Koh for <img alt="25646yg" id="ga" src="http://i40.tinypic.com/25646yg.png" /> <span>General Assembly</span> 2013</p>
+</footer>
+
+</body>
+</html>

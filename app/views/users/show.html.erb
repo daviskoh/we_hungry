@@ -8,6 +8,7 @@
 <ul id='recommendations_list'>
   <% @reco_list.each do |food| %>
     <li class='food'>
+      <% #TODO normalize is called here %>
       <%= link_to normalize(food.name), user_playlist_food_path(current_user, food), class: "food_specific" %>
       <%= link_to image_tag(food.image_url, class: "food_image"), user_playlist_food_path(current_user, food) %>
       <!-- Like Button -->

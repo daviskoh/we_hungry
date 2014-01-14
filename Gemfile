@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
+# Caching no longer part of Rails core
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
