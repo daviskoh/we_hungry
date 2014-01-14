@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   include UsersHelper
   before_action :authenticated!, :set_user, :authorized!, except: [:new, :create]
+  caches_page :new
+  caches_action :show
 
   def new
     @user = User.new
@@ -36,19 +38,6 @@ class UsersController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def generate
-    # generate_food 
-    gen_preferred_food
-
-    add_to_user_foodlist(@food)
-
-    @food.ingredients.each do |ing|
-      add_to_user_ingredients(ing) unless user_has_ingredient?(ing)
-    end
-
-    render json: @food
   end
 
   # helper methods
