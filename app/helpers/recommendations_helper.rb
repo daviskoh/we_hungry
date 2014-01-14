@@ -143,15 +143,6 @@ module RecommendationsHelper
     # end
   end
 
-  def get_top_2_ingredients
-    relations = IngredientsUsers.where('user_id = ?', current_user.id).sort_by do |relation|
-      ci_lower_bound(relation.pos_votes, relation.tot_votes, 0.95)
-    end.reverse[0..1]
-
-    # [Ingredient.find(relation[0].ingredient_id), Ingredient.find(relation[1].ingredient_id)]
-    Ingredient.where("id = ? OR id = ?", relations[0].ingredient_id, relations[1].ingredient_id)
-  end
-
   def include_preferences?(food, ingredients_array)
     ingredients_array.all? { |ing| food.ingredients.include?(ing) }
     # (ingredients_array & food.ingredients).count == ingredients_array.count
@@ -159,11 +150,9 @@ module RecommendationsHelper
 
   def gen_preferred_food
     #TODO fix redunency below
-    # reco = generate_food
-    # reco = generate_food until include_preferences?(reco, get_top_2_ingredients)
-    # reco
-    ings = get_top_2_ingredients
-    binding.pry
+    ings = current_user.top_ingredients(1)
+    reco = generate_food
+    # binding.pry
     reco = generate_food until reco.include_preferences?(ings)
     reco
 
