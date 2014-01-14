@@ -9,13 +9,15 @@ class RecommendationsController < ApplicationController
     # generate_food 
     gen_preferred_food
 
-    add_to_user_foodlist(@food)
+    # binding.pry
+
+    current_user.playlist_foods << @food
 
     @food.ingredients.each do |ing|
-      add_to_user_ingredients(ing) unless user_has_ingredient?(ing)
+      current_user.ingredients << ingredient unless user_has_ingredient?(ing)
     end
 
-    render json: @food
+    render json: @food, status: 200
   end
 
   private

@@ -19,4 +19,6 @@ describe RecommendationsHelper do
       expect(@food).to_not be_nil
     end
   end
+
+  
 end

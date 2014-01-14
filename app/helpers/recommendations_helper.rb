@@ -46,32 +46,10 @@ module RecommendationsHelper
 
   ###################################################
 
-  # get api data ####################################
-
-  # def food_in_db?(food)
-  #   PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == food.name.downcase }
-  # end  
-
-  # def api_call
-  # end
-
-  # def get_food_from_api
-  #   api_call
-
-  #   # generates unique food not already in PlaylistFood
-  #   while food_in_db?(@food)
-  #     api_call
-  #   end
-
-  #   @food
-  # end
-
-  ###################################################
-
   # get food ########################################
 
   def pull_food_from_db
-    @food = PlaylistFood.all.sample
+    PlaylistFood.order("random()").first
   end
 
   ###################################################
@@ -151,60 +129,49 @@ module RecommendationsHelper
   # generate food ###################################
 
   def generate_food
-    if current_user.vege
-      get_vege_food
-    elsif current_user.lactose
-      get_milkess_food
-    elsif current_user.vegan
-      get_vegan_food
-    elsif current_user.nut
-      get_nutless_food
-    else
+    # if current_user.vege
+    #   get_vege_food
+    # elsif current_user.lactose
+    #   get_milkess_food
+    # elsif current_user.vegan
+    #   get_vegan_food
+    # elsif current_user.nut
+    #   get_nutless_food
+    # else
       # get_food_from_api
       pull_food_from_db
-    end
+    # end
   end
 
-  def get_top_3_ingredients
-    sorted = IngredientsUsers.all.sort_by do |relation|
+  def get_top_2_ingredients
+    relations = IngredientsUsers.where('user_id = ?', current_user.id).sort_by do |relation|
       ci_lower_bound(relation.pos_votes, relation.tot_votes, 0.95)
-    end
+    end.reverse[0..1]
 
-    top_2_ingredients_relation = sorted.reverse[0..1]
-
-    top_2_ingredients = []
-
-    top_2_ingredients_relation.each do |relation|
-      ingredient = Ingredient.find(relation.ingredient_id)
-      top_2_ingredients << ingredient
-    end
-
-    top_2_ingredients
+    # [Ingredient.find(relation[0].ingredient_id), Ingredient.find(relation[1].ingredient_id)]
+    Ingredient.where("id = ? OR id = ?", relations[0].ingredient_id, relations[1].ingredient_id)
   end
 
   def include_preferences?(food, ingredients_array)
     ingredients_array.all? { |ing| food.ingredients.include?(ing) }
+    # (ingredients_array & food.ingredients).count == ingredients_array.count
   end
 
   def gen_preferred_food
-    generate_food until include_preferences?(generate_food, get_top_3_ingredients)
+    #TODO fix redunency below
+    # reco = generate_food
+    # reco = generate_food until include_preferences?(reco, get_top_2_ingredients)
+    # reco
+    ings = get_top_2_ingredients
+    binding.pry
+    reco = generate_food until reco.include_preferences?(ings)
+    reco
+
   end
 
   ###################################################
 
   # database insertion ###############################
-
-  def add_to_user_foodlist(food)
-    # create playlist_food
-    # playlist_food = PlaylistFood.create(name: food["recipeName"], image_url: food["smallImageUrls"].first)
-
-    # establish playlist_food user relation
-    current_user.playlist_foods << food
-  end
-
-  # def ingredient_in_db?(ingredient)
-  #   Ingredient.all.any? { |ing| ing.name.downcase == ingredient.downcase }
-  # end
 
   def user_has_ingredient?(ingredient)
     current_user.ingredients.include?(ingredient)
@@ -213,18 +180,6 @@ module RecommendationsHelper
   def food_has_ingredient?(food, ingredient)
     food.ingredients.include?(ingredient)
   end
-
-  def add_to_user_ingredients(ingredient)
-    current_user.ingredients << ingredient
-  end
-
-  # def insert_ingredients_into_db(ingredients_array)
-  #   ingredients_array.each do |ing|
-  #     Ingredient.create(name: ing.downcase) unless ingredient_in_db?(ing)
-  #     # establish user relation
-  #     add_to_user_ingredients(ing)
-  #   end
-  # end
 
   ###################################################
 
