@@ -20,8 +20,8 @@ module RecommendationsHelper
     food_data = food_name.downcase
 
     # remove unnecessary words
-    unnecessary_words.each do |word|
-      food_data.gsub!(word, "")
+    food_data.split(/\W+/).each do |w|
+      food_data.gsub!(/\w+/) { |word| unnecessary_words.include?(word) ? '' : word }
     end
 
     # if name begin with "and", remove
@@ -136,7 +136,7 @@ module RecommendationsHelper
 
   def ci_lower_bound(pos, n, confidence)
     if n == 0
-        return 0
+      return 0
     end
     z = Statistics2.pnormaldist(1-(1-confidence)/2)
     phat = 1.0*pos/n
