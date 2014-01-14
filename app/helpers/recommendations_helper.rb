@@ -1,4 +1,4 @@
-module UsersHelper
+module RecommendationsHelper
   #TODO test normalize method
   #TODO change to sql
 

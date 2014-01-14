@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  include UsersHelper
   before_action :authenticated!, :set_user, :authorized!, except: [:new, :create]
   caches_page :new
   caches_action :show

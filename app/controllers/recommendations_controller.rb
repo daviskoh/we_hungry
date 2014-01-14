@@ -3,7 +3,9 @@ class RecommendationsController < ApplicationController
   before_action :authenticated!, :set_user, :authorized!
 
   def generate
-    expire_action action: :show
+    # expire cache from specified in UsersController
+    expire_action controller: '/users', action: :show
+
     # generate_food 
     gen_preferred_food
 
