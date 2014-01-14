@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticated!, :set_user, :authorized!, except: [:new, :create]
   caches_page :new
-  caches_action :show
+  # caches_action :show
 
   def new
     @user = User.new
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @reco_list = @user.playlist_foods.order(created_at: :desc)
+    @reco_list = @user.playlist_foods.reverse
   end
 
   def edit

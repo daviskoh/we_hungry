@@ -136,7 +136,7 @@ module RecommendationsHelper
 
   # use to rank ingredients #######################
 
-  def ci_lower_bound(pos, n, confidence)
+  def ci_lower_bound(pos, total, confidence)
     if pos == 0
       return -(total - pos)
     end

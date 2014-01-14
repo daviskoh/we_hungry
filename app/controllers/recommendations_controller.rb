@@ -4,7 +4,7 @@ class RecommendationsController < ApplicationController
 
   def generate
     # expire cache from specified in UsersController
-    expire_action controller: '/users', action: :show
+    # expire_action controller: '/users', action: :show
 
     # generate_food 
     gen_preferred_food
