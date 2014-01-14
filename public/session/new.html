@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>We Huungry</title>
+  <link data-turbolinks-track="true" href="/assets/application.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/style.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/welcome.css?body=1" media="all" rel="stylesheet" />
+  <script data-turbolinks-track="true" src="/assets/jquery.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/jquery_ujs.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/turbolinks.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/application.js?body=1"></script>
+  <meta content="authenticity_token" name="csrf-param" />
+<meta content="TzFP0uXqxuS3S0loD/ij7X+Mj88ZgJ3vhx3GcWm4+Pc=" name="csrf-token" />
+</head>
+
+
+<body>
+  <div class="nav">
+    <nav>
+        <ul>
+            <li><a class="nav_button" data-method="get" href="/users/new">Sign Up</a></li>
+            <li><a class="nav_button" data-method="get" href="/session/new">Login</a></li>
+          <p id="logo">We H<span>uu</span>ngry</p>
+        </ul>
+    </nav>
+  </div>
+
+<div id="content">
+  <h1>Login</h1>
+
+<form accept-charset="UTF-8" action="/session" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="TzFP0uXqxuS3S0loD/ij7X+Mj88ZgJ3vhx3GcWm4+Pc=" /></div>
+  <label for="email">Email</label>
+  <input id="email" name="email" type="text" />
+
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password" />
+
+  <input name="commit" type="submit" value="Log In" />
+</form>
+
+</div>
+
+<footer>
+  <p>By Davis Koh for <img alt="25646yg" id="ga" src="http://i40.tinypic.com/25646yg.png" /> <span>General Assembly</span> 2013</p>
+</footer>
+
+</body>
+</html>
