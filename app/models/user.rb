@@ -17,6 +17,6 @@ class User < ActiveRecord::Base
     # else
       # must change below if want amount to be dynamic
       Ingredient.where("id = ? OR id = ?", relationships[0].ingredient_id, relationships[1].ingredient_id)
-    end
+    # end
   end
 end
