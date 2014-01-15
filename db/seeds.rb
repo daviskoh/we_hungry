@@ -13,12 +13,13 @@ end
 
 def ingredient_in_db?(ingredient)
   # Ingredient.all.any? { |ing| ing.name.downcase == ingredient.downcase }
-  !Ingredient.where('LOWER(name) = LOWER(?)', ingredient.name).empty?
+  !Ingredient.where('LOWER(name) = LOWER(?)', ingredient).empty?
 end
 
-response = Yummly.search("main", maxResult: 400, start: 4000)
+response = Yummly.search("main", maxResult: 4, start: 8)
 
 response.each do |recipe|
+  binding.pry
   food = unless food_in_db?(recipe)
     PlaylistFood.create(name: recipe.name, image_url: recipe.thumbnail)
   else

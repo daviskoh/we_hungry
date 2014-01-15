@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
 
     relationships = IngredientsUsers.where('user_id = ? AND tot_votes > 0', self.id).order(ci_lower_bound_query)
 
-    if relationships.empty?
-      Ingredient.order('random() LIMIT 2')
-    else
+    # if relationships.empty?
+    #   Ingredient.order('random() LIMIT 2')
+    # else
       # must change below if want amount to be dynamic
       Ingredient.where("id = ? OR id = ?", relationships[0].ingredient_id, relationships[1].ingredient_id)
     end

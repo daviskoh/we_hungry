@@ -147,9 +147,9 @@ module RecommendationsHelper
     #TODO fix redunency below
     ings = current_user.top_ingredients
     
-    reco = generate_food until reco && reco.include_preferences?(ings)
+    @reco = generate_food until @reco && @reco.include_preferences?(ings)
 
-    reco
+    @reco
   end
 
   ###################################################

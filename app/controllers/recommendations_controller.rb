@@ -7,17 +7,21 @@ class RecommendationsController < ApplicationController
     # expire_action controller: '/users', action: :show
 
     # generate_food 
-    gen_preferred_food
+    unless current_user.ingredients.empty?
+      gen_preferred_food 
+    else
+      @reco = PlaylistFood.order('random()').first
+    end
 
     # binding.pry
 
-    current_user.playlist_foods << @food
+    current_user.playlist_foods << @reco
 
-    @food.ingredients.each do |ing|
+    @reco.ingredients.each do |ing|
       current_user.ingredients << ingredient unless user_has_ingredient?(ing)
     end
 
-    render json: @food, status: 200
+    render json: @reco, status: 200
   end
 
   private
