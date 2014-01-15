@@ -35,6 +35,6 @@ response.each do |recipe|
 
   unless food_in_db?(recipe)
     food = PlaylistFood.create(name: recipe.name, image_url: recipe.thumbnail)
-    recipe.ingredients.each { |ing| food << Ingredient.create(name: ing.downcase) }
+    recipe.ingredients.each { |ing| food.ingredients << Ingredient.create(name: ing.downcase) }
   end
 end
