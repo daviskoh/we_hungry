@@ -18,7 +18,7 @@ class RecommendationsController < ApplicationController
     current_user.playlist_foods << @reco
 
     @reco.ingredients.each do |ing|
-      current_user.ingredients << ingredient unless user_has_ingredient?(ing)
+      current_user.ingredients << ing unless user_has_ingredient?(ing)
     end
 
     render json: @reco, status: 200
