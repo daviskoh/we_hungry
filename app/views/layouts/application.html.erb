@@ -3,7 +3,6 @@
 <head>
   <title>We Huungry</title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 
@@ -33,13 +32,15 @@
     </nav>
   </div>
 
-<div id="content">
-  <%= yield %>
-</div>
+  <div id="content">
+    <%= yield %>
+  </div>
 
-<footer>
-  <p>By Davis Koh for <%= image_tag "http://i40.tinypic.com/25646yg.png", id: "ga" %> <span>General Assembly</span> 2013</p>
-</footer>
+  <footer>
+    <p>By Davis Koh for <%= image_tag "http://i40.tinypic.com/25646yg.png", id: "ga" %> <span>General Assembly</span> 2013</p>
+  </footer>
 
+
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 </body>
 </html>
