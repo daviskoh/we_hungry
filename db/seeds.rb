@@ -6,12 +6,15 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Rails.cache.write('all_food', PlaylistFood.all)
+Rails.cache.write('all_ing', Ingredient.all)
+
 def food_in_db?(food)
-  PlaylistFood.all.any? { |playlist_food| playlist_food.name.downcase == food.name.downcase }
+  Rails.cache.fetch('all_food').any? { |playlist_food| playlist_food.name.downcase == food.name.downcase }
 end
 
 def ingredient_in_db?(ingredient)
-  Ingredient.all.any? { |ing| ing.name.downcase == ingredient.downcase }
+  Rails.cache.fetch('all_ing').any? { |ing| ing.name.downcase == ingredient.downcase }
 end
 
 response = Yummly.search("main", maxResult: 5, start: 1)
@@ -32,5 +35,5 @@ response.each do |recipe|
   end
 end
 
-
-
+Rails.cache.delete('all_food')
+Rails.cache.delete('all_ing')
