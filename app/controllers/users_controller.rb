@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticated!, :set_user, :authorized!, except: [:new, :create]
-  caches_page :new
-  # caches_action :show
-
+  
   def new
     @user = User.new
   end

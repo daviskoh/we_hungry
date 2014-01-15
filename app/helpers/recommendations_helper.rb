@@ -143,19 +143,13 @@ module RecommendationsHelper
     # end
   end
 
-  def include_preferences?(food, ingredients_array)
-    ingredients_array.all? { |ing| food.ingredients.include?(ing) }
-    # (ingredients_array & food.ingredients).count == ingredients_array.count
-  end
-
   def gen_preferred_food
     #TODO fix redunency below
-    ings = current_user.top_ingredients(1)
-    reco = generate_food
-    # binding.pry
-    reco = generate_food until reco.include_preferences?(ings)
-    reco
+    ings = current_user.top_ingredients
+    
+    reco = generate_food until reco && reco.include_preferences?(ings)
 
+    reco
   end
 
   ###################################################
