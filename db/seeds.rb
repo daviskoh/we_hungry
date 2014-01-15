@@ -19,17 +19,22 @@ end
 response = Yummly.search("main", maxResult: 101, start: 2000)
 
 response.each do |recipe|
-  food = unless food_in_db?(recipe)
+  # food = unless food_in_db?(recipe)
+  #   PlaylistFood.create(name: recipe.name, image_url: recipe.thumbnail)
+  # else
+  #   PlaylistFood.find_by(name: recipe.name)
+  # end
+
+  # recipe.ingredients.each do |ing|
+  #   unless ingredient_in_db?(ing)
+  #     Ingredient.create(name: ing.downcase)
+  #   end
+
+  #   food.ingredients << Ingredient.where('LOWER(name) = LOWER(?)', ing)
+  # end
+
+  unless food_in_db?(recipe)
     PlaylistFood.create(name: recipe.name, image_url: recipe.thumbnail)
-  else
-    PlaylistFood.find_by(name: recipe.name)
-  end
-
-  recipe.ingredients.each do |ing|
-    unless ingredient_in_db?(ing)
-      Ingredient.create(name: ing.downcase)
-    end
-
-    food.ingredients << Ingredient.where('LOWER(name) = LOWER(?)', ing)
+    recipe.ingredients.each { |ing| Ingredient.create(name: ing.downcase) }
   end
 end
