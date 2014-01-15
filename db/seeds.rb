@@ -14,19 +14,21 @@ def ingredient_in_db?(ingredient)
   Ingredient.all.any? { |ing| ing.name.downcase == ingredient.downcase }
 end
 
-response = Yummly.search(" ", maxResult: 400, start: 2500)
+response = Yummly.search("main", maxResult: 5, start: 1)
 
 response.each do |recipe|
-  unless food_in_db?(recipe)
-    @food = PlaylistFood.create(name: recipe.name, image_url: recipe.thumbnail)
+  food = unless food_in_db?(recipe)
+    PlaylistFood.create(name: recipe.name, image_url: recipe.thumbnail)
+  else
+    PlaylistFood.find_by(name: recipe.name)
   end
 
   recipe.ingredients.each do |ing|
     unless ingredient_in_db?(ing)
-      Ingredient.create(name: ing)
+      Ingredient.create(name: ing.downcase)
     end
 
-    PlaylistFood.last.ingredients << Ingredient.find_by(name: ing)
+    food.ingredients << Ingredient.find_by(name: ing.downcase)
   end
 end
 
