@@ -40,6 +40,7 @@ $(function() {
     // progress bar while loading food
   // upon success, persist to DB & immediate prepend to list
   $('a#generate').on('click', function(e) {
+    console.log('click GENERATE');
     e.preventDefault();
 
     $.ajax({
