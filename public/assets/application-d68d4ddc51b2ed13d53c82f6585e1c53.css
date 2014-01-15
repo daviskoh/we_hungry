@@ -1,0 +1,291 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+ */
+
+/* #Variables ***************************************************/
+/* #Mixins ********************************************************/
+/******************************************************************/
+.error {
+  background-color: red;
+  color: black;
+  width: 40%;
+  float: left; }
+
+body {
+  background-color: #f2f2f2; }
+
+span {
+  font-family: Times, sans-serif;
+  color: white; }
+
+p#logo {
+  font-family: Zapf Chancery, cursive;
+  font-size: 2em;
+  position: fixed;
+  top: -24px;
+  left: 44%;
+  opacity: 1;
+  color: #01FDFD; }
+
+.nav {
+  margin-bottom: 4em;
+  background: #d60009;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 9%;
+  border-radius: 0px 0px 10px 10px;
+  -moz-box-shadow: 1px 1px 3px 2px #babac4;
+  -webkit-box-shadow: 1px 1px 5px 3px #babac4;
+  box-shadow: 1px 1px 3px 3px #babac4;
+  opacity: .8;
+  z-index: 2; }
+
+nav ul li {
+  display: inline-block; }
+
+.nav_button {
+  text-decoration: none;
+  color: #000000;
+  border: 2px solid #d8d8d8;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 5px; }
+  .nav_button:hover {
+    color: #01FDFD;
+    background-color: #F31749; }
+  .nav_button:active {
+    border-style: inset; }
+
+h1#reco_title {
+  font-family: Gill Sans, sans-serif;
+  font-size: 2.7em;
+  color: #d60009;
+  border-top: 2px solid #babac4;
+  border-radius: 2em;
+  padding-top: 1.5em;
+  padding-bottom: 0px;
+  margin-top: 170px; }
+
+.nav_left {
+  float: left; }
+
+.nav_right {
+  float: right;
+  margin-right: 1em; }
+
+.logout {
+  /*fix later for screen size*/
+  /*margin-left: 1600%;*/
+  border: 2px solid #d8d8d8;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 5px; }
+  .logout:hover {
+    color: #01FDFD;
+    background-color: #F31749; }
+  .logout:active {
+    border-style: inset; }
+
+#content {
+  background-color: #FFFFFF;
+  text-align: center;
+  margin-top: 3.5em;
+  margin-left: 20%;
+  margin-bottom: -30px;
+  min-height: 1000px;
+  width: 60%;
+  border-left: 2px solid #babac4;
+  border-right: 2px solid #babac4;
+  position: relative;
+  padding-bottom: 20px; }
+
+ul {
+  list-style: none; }
+
+.edit {
+  text-decoration: none;
+  color: #000000;
+  border: 2px solid #e5e5e5;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #d60009;
+  text-align: left;
+  position: relative;
+  top: 20px; }
+  .edit:hover {
+    color: #01FDFD;
+    background-color: #F31749; }
+  .edit:active {
+    border-style: inset; }
+
+/*adjust size of button*/
+a#generate {
+  font-family: Comic Sans, Comic Sans MS, cursive;
+  font-size: 3em;
+  font-variant: small-caps;
+  background: #d60009;
+  width: 70%;
+  text-decoration: none;
+  color: #FFFFFF;
+  border: 4px solid #e5e5e5;
+  border-radius: 1em;
+  padding: .5em;
+  position: relative;
+  top: 90px; }
+  a#generate:hover {
+    color: #01FDFD;
+    border: 4px solid #FFFFFF; }
+  a#generate:active {
+    border-style: inset; }
+
+.food {
+  margin-bottom: 2em;
+  background: white;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, white 0%, #f1f1f1 56%, white 96%, #f6f6f6 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(56%, #f1f1f1), color-stop(96%, white), color-stop(100%, #f6f6f6));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, white 0%, #f1f1f1 56%, white 96%, #f6f6f6 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, white 0%, #f1f1f1 56%, white 96%, #f6f6f6 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, white 0%, #f1f1f1 56%, white 96%, #f6f6f6 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, white 0%, #f1f1f1 56%, white 96%, #f6f6f6 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );
+  /* IE6-9 */
+  -moz-box-shadow: 1px 1px 3px 2px #babac4;
+  -webkit-box-shadow: 1px 1px 5px 3px #babac4;
+  box-shadow: 1px 1px 3px 3px #babac4;
+  width: 40%;
+  margin-left: 27%;
+  margin-right: 2em;
+  border-radius: .5em;
+  margin-top: 3em; }
+
+a.food_specific {
+  font-family: Zapf Chancery, cursive;
+  font-size: 1.5em;
+  text-decoration: none;
+  color: #09C; }
+
+.food_image {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: 32.3%;
+  -moz-box-shadow: 1px 1px 3px 2px #babac4;
+  -webkit-box-shadow: 1px 1px 5px 3px #babac4;
+  box-shadow: 1px 1px 3px 3px #babac4;
+  width: 100px;
+  height: 60px; }
+  .food_image:hover {
+    /*-moz-box-shadow: 1px 1px 3px 2px $shadow-color;
+    -webkit-box-shadow: 1px 1px 5px 3px $shadow-color;*/
+    box-shadow: 1px 1px 5px 5px #babac4; }
+  .food_image:active {
+    border-style: inset; }
+
+.thumbs_up {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: inline-block;
+  border: 1.5px solid #11772d;
+  border-style: outset; }
+  .thumbs_up:hover {
+    background-color: #97f0af; }
+  .thumbs_up:active {
+    border-style: inset; }
+
+.thumbs_down {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: inline-block;
+  border: 1.5px solid #92040e;
+  border-style: outset; }
+  .thumbs_down:hover {
+    background-color: #fc99a0; }
+  .thumbs_down:active {
+    border-style: inset; }
+
+.ingredient {
+  font-family: Palatino, serif;
+  top: 30px; }
+
+form {
+  background: -webkit-gradient(linear, bottom, left 175px, from(#cccccc), to(#eeeeee));
+  background: -moz-linear-gradient(bottom, #cccccc, #eeeeee 175px);
+  margin: auto;
+  width: 550px;
+  height: 300px;
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 24px;
+  font-weight: bold;
+  color: #09C;
+  text-decoration: none;
+  padding: 10px;
+  border: 1px solid #999;
+  border: inset 1px solid #333;
+  -moz-box-shadow: 1px 1px 3px 2px #babac4;
+  -webkit-box-shadow: 1px 1px 5px 3px #babac4;
+  box-shadow: 1px 1px 3px 3px #babac4;
+  display: block; }
+  form label {
+    float: left;
+    clear: both; }
+  form input {
+    border-radius: 2px;
+    float: right;
+    width: 50%;
+    margin-bottom: 5%; }
+  form .button {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-style: italic;
+    clear: both;
+    width: 20%;
+    height: 12%;
+    font-size: 1.5em;
+    background-color: #ff232d;
+    color: #01FDFD;
+    border-radius: 5px; }
+
+footer {
+  background-color: #d60009;
+  /*position: fixed;*/
+  bottom: 0;
+  left: 0;
+  margin-top: 0px;
+  width: 101.5%;
+  margin-left: -10px;
+  min-height: 50px;
+  text-align: center;
+  border-radius: 10px 10px 0px 0px;
+  margin-bottom: -200px;
+  position: relative;
+  clear: both;
+  margin-bottom: -23px; }
+  footer #ga {
+    height: .75em;
+    width: .75em; }
