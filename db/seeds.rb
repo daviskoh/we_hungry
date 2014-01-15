@@ -16,7 +16,7 @@ def ingredient_in_db?(ingredient)
   !Ingredient.where('LOWER(name) = LOWER(?)', ingredient).empty?
 end
 
-response = Yummly.search("main", maxResult: 4, start: 8)
+response = Yummly.search("main", maxResult: 100, start: 2000)
 
 response.each do |recipe|
   food = unless food_in_db?(recipe)
