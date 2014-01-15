@@ -40,6 +40,13 @@ $shadow-color: #BABAC4;
 
 /******************************************************************/
 
+.error {
+  background-color: red;
+  color: black;
+  width: 40%;
+  float: left;
+}
+
 body {
   background-color: rgb(95%,95%,95%);
 }
@@ -53,7 +60,6 @@ p#logo {
   font-family: Zapf Chancery, cursive;
   font-size: 2em;
   position: fixed;
-  color: #FFFFFF;
   top: -24px;
   left: 44%;
   opacity: 1;
@@ -238,7 +244,7 @@ form {
   background: -moz-linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);
   margin:auto;
   width:550px;
-  height:200px;
+  height:300px;
   font-family: Tahoma, Geneva, sans-serif;
   font-size: 14px;
   font-style: italic;
@@ -252,6 +258,30 @@ form {
   border: inset 1px solid #333;
   
   @include primary-box-shadow;
+
+  display: block;
+
+  label {
+    float: left;
+    clear: both;
+  }
+  input {
+    border-radius: 2px;
+    float: right;  
+    width: 50%;
+    margin-bottom: 5%;
+  }
+  .button {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-style: italic;
+    clear: both;
+    width: 20%;
+    height: 12%;
+    font-size: 1.5em;
+    background-color: lighten($primary-color, 15%);
+    color: #01FDFD;
+    border-radius: 5px;
+  }
 }
 
 footer {

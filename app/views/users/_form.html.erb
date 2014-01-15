@@ -1,14 +1,10 @@
-<% unless @user.errors.none? %>
-  <% @user.errors.full_messages.each do |msg| %>
-    <%= msg %>
-  <% end %>
-<% end %>
-
 <%= form_for @user do |f| %>
   <%= f.label :email %>
+  <%= f.label @user.errors.full_messages[0], class: 'error' unless @user.errors.none? %>
   <%= f.email_field :email %>
 
   <%= f.label :password %>
+  <%= f.label @user.errors.full_messages[1], class: 'error' unless @user.errors.none? %>
   <%= f.password_field :password %>
 
   <%= f.label :password_confirmation %>
@@ -16,5 +12,5 @@
 
   <!-- add allergies -->
 
-  <%= f.submit logged_in? ? 'Update' : 'Sign Up' %>
+  <%= f.submit logged_in? ? 'Update' : 'Sign Up', class: 'button' %>
 <% end %>
