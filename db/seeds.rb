@@ -19,7 +19,6 @@ end
 response = Yummly.search("main", maxResult: 4, start: 8)
 
 response.each do |recipe|
-  binding.pry
   food = unless food_in_db?(recipe)
     PlaylistFood.create(name: recipe.name, image_url: recipe.thumbnail)
   else
