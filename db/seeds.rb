@@ -16,7 +16,7 @@ def ingredient_in_db?(ingredient)
   !Ingredient.where('LOWER(name) = LOWER(?)', ingredient).empty?
 end
 
-response = Yummly.search("main", maxResult: 100, start: 2000)
+response = Yummly.search("main", maxResult: 101, start: 2000)
 
 response.each do |recipe|
   food = unless food_in_db?(recipe)
@@ -30,6 +30,6 @@ response.each do |recipe|
       Ingredient.create(name: ing.downcase)
     end
 
-    food.ingredients << Ingredient.find_by(name: ing.downcase)
+    food.ingredients << Ingredient.where('LOWER(name) = LOWER(?)', ing)
   end
 end
