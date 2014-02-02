@@ -144,12 +144,12 @@ module RecommendationsHelper
   end
 
   def gen_preferred_food
+    # binding.pry
     #TODO fix redunency below
-    ings = current_user.top_ingredients
+    # ings = current_user.top_ingredients
     
-    @reco = generate_food until @reco && @reco.include_preferences?(ings)
-
-    @reco
+    # @reco = generate_food until @reco && @reco.include_preferences?(ings)
+    PlaylistFood.select { |food| food.include_preferences? current_user.top_ingredients  }.sample
   end
 
   ###################################################

@@ -7,13 +7,14 @@ class RecommendationsController < ApplicationController
     # expire_action controller: '/users', action: :show
 
     # generate_food 
-    unless current_user.ingredients.count < 2
+    @reco = unless current_user.ingredients.count < 2
       gen_preferred_food 
     else
-      @reco = PlaylistFood.order('random()').first
+      PlaylistFood.order('random()').first
     end
 
     # binding.pry
+    #TODO u sure u want instance variable @reco here and in reco helper?
 
     current_user.playlist_foods << @reco
 

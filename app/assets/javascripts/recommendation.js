@@ -10,7 +10,7 @@ $(function() {
 
     if (linkExtension) link += "/" + linkExtension; 
 
-    return $("<a href='" + link + "' class='" + className + "'></a>").append(button);
+    return $("<a href='" + link + "' class='" + className + "' method='POST'></a>").append(button);
   }
 
   var appendLi = function(foodObject) {
