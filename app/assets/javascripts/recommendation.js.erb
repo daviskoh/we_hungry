@@ -3,15 +3,21 @@ $(function() {
 
   var createImage = function(url, className) {
     return $("<img src='" + url + "' class='" + className + "'>");
-  }
+  };
 
   var createLink = function(button, foodObject, linkExtension, className) {
     var link = "/users/" + sessionID + "/playlist_foods/" + foodObject.id;
+    var buttonQuery = '';
 
-    if (linkExtension) link += "/" + linkExtension; 
+    if (linkExtension) {
+      link += "/" + linkExtension;
+      buttonQuery += "data-method='put' rel='nofollow'";
+    }
 
-    return $("<a href='" + link + "' class='" + className + "' method='POST'></a>").append(button);
-  }
+    <% #TODO change buttons to dummy & use AJAX %>
+    
+    return $("<a href='" + link + "' class='" + className + "'" + buttonQuery + "></a>").append(button);
+  };
 
   var appendLi = function(foodObject) {
     console.log('appending food reco');
@@ -26,14 +32,14 @@ $(function() {
 
     // thumbs up link
     var img = createImage('http://images.wikia.com/candy-crush-saga/images/7/7e/Thumbs-up-icon.png', 'thumbs_up');
-    li.append( createLink(img, foodObject, '/like') );
+    li.append( createLink(img, foodObject, '/like', 'like') );
 
     // thumbs down link
     var img = createImage('http://upload.wikimedia.org/wikipedia/en/2/2f/Thumbs-down-icon.png', 'thumbs_down');
-    li.append( createLink(img, foodObject, '/dislike') );
+    li.append( createLink(img, foodObject, '/dislike', 'dislike') );
 
     $('#recommendations_list').prepend(li);
-  }
+  };
 
   // attach even listener to #generate button
   // ajax for reco
@@ -59,5 +65,11 @@ $(function() {
         response = arguments;
       }
     });
+
+    $('a.like').on('click', function(e) {
+      e.preventDefault();
+
+      console.log('food LIKED');
+    })
   });
 })
