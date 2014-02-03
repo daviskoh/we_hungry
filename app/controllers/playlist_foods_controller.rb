@@ -5,10 +5,8 @@ class PlaylistFoodsController < ApplicationController
   def show
   end
 
-  #TODO change below to api
-
   def like
-    binding.pry
+    # binding.pry
     @food.ingredients.each do |ing|
       relation = IngredientsUsers.where(user_id: current_user.id, ingredient_id: ing.id)[0]
       relation.pos_votes += 1
@@ -18,11 +16,11 @@ class PlaylistFoodsController < ApplicationController
 
     PlaylistFoodsUsers.where(user_id: current_user.id, playlist_food_id: @food.id)[0].destroy
 
-    redirect_to user_path(current_user)
+    render json: @food, status: 200
   end
 
   def dislike
-    binding.pry
+    # binding.pry
     @food.ingredients.each do |ing|
       relation = IngredientsUsers.where(user_id: current_user.id, ingredient_id: ing.id)[0]
       relation.tot_votes += 1
@@ -31,7 +29,7 @@ class PlaylistFoodsController < ApplicationController
 
     PlaylistFoodsUsers.where(user_id: current_user.id, playlist_food_id: @food.id)[0].destroy
 
-    redirect_to user_path(current_user)
+    render json: @food, status: 200
   end
 
   private

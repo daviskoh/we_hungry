@@ -11,18 +11,15 @@ $(function() {
 
     if (linkExtension) {
       link += "/" + linkExtension;
-      buttonQuery += "data-method='put' rel='nofollow'";
     }
 
-    <% #TODO change buttons to dummy & use AJAX %>
-    
     return $("<a href='" + link + "' class='" + className + "'" + buttonQuery + "></a>").append(button);
   };
 
   var appendLi = function(foodObject) {
     console.log('appending food reco');
 
-    var li = $("<li class='food'></li>");
+    var li = $("<li class='food'" + "id='" + foodObject.id + "'></li>");
 
     // name link
     li.append( createLink(foodObject.name, foodObject, false, 'food_specific') );
@@ -39,6 +36,9 @@ $(function() {
     li.append( createLink(img, foodObject, '/dislike', 'dislike') );
 
     $('#recommendations_list').prepend(li);
+
+    addVoteEvent($('a.like'));
+    addVoteEvent($('a.dislike'));
   };
 
   // attach even listener to #generate button
@@ -65,11 +65,28 @@ $(function() {
         response = arguments;
       }
     });
-
-    $('a.like').on('click', function(e) {
-      e.preventDefault();
-
-      console.log('food LIKED');
-    })
   });
+
+  var addVoteEvent = function(button) {
+    button.on('click', function(e) {
+      e.preventDefault();
+      console.log('food ' + button.attr('class').toUpperCase() + 'D');
+
+      // send AJAX to server PUT request
+      $.ajax({
+        url: '/users/' + sessionID + '/playlist_foods/' + $(this).parent()[0].id + '/' + button.attr('class'),
+        type: 'POST',
+        dataType: 'json',
+        data: { _method: 'PUT' },
+        // upon completion, remove parent from DOM
+        complete: function() {
+          $(this).parent().remove();
+        },
+        context: this
+      });
+    });
+  };
+
+  addVoteEvent($('a.like'));
+  addVoteEvent($('a.dislike'));
 })

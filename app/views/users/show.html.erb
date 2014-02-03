@@ -7,14 +7,14 @@
 
 <ul id='recommendations_list'>
   <% @reco_list.each do |food| %>
-    <li class='food'>
+    <li class='food' id='<%= food.id %>'>
       <% #TODO normalize is called here %>
       <%= link_to normalize(food.name), user_playlist_food_path(current_user, food), class: "food_specific" %>
       <%= link_to image_tag(food.image_url, class: "food_image"), user_playlist_food_path(current_user, food) %>
       <!-- Like Button -->
-      <%= link_to image_tag("http://images.wikia.com/candy-crush-saga/images/7/7e/Thumbs-up-icon.png", class: "thumbs_up"), like_user_playlist_food_path(current_user, food), method: "put", class: 'like' %>
+      <a href="#" class='like'><%= image_tag("http://images.wikia.com/candy-crush-saga/images/7/7e/Thumbs-up-icon.png", class: "thumbs_up") %></a>
       <!-- Dislike Button -->
-      <%= link_to image_tag("http://upload.wikimedia.org/wikipedia/en/2/2f/Thumbs-down-icon.png", class: "thumbs_down"), dislike_user_playlist_food_path(current_user, food), method: "put", class: 'dislike' %>
+      <a href="#" class='dislike'><%= image_tag("http://upload.wikimedia.org/wikipedia/en/2/2f/Thumbs-down-icon.png", class: "thumbs_down") %></a>
       <!-- build out unliked_foods, ingredients, trials before -->
     </li>
   <% end %>
