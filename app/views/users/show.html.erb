@@ -6,6 +6,8 @@
 <h1 id="reco_title">Your Recommendations:</h1>
 
 <ul id='recommendations_list'>
+  <canvas id="circle"></canvas>
+
   <% @reco_list.each do |food| %>
     <li class='food' id='<%= food.id %>'>
       <% #TODO normalize is called here %>

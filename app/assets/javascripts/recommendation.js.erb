@@ -54,9 +54,16 @@ $(function() {
       type: 'GET',
       dataType: 'json',
       data: {id: sessionID},
+      beforeSend: function() {
+        console.log('progress spinner start');
+        $('#circle').show();
+        animateDrawCircle(0);
+      },
       success: function(foodObject) {
         console.log('reco gen SUCCESS');
         response = arguments;
+
+        $('#circle').hide();
 
         appendLi(foodObject);
       },
@@ -89,4 +96,53 @@ $(function() {
 
   addVoteEvent($('a.like'));
   addVoteEvent($('a.dislike'));
+
+  $('#circle').hide();
+
+  /***** CANVAS API ****/
+  var canvas = $('#circle')[0];
+  var ctx = canvas.getContext("2d");
+
+  $(canvas).css({width: "400", height: "200"}); // squish it to make the pixels work!
+
+  function drawArc(startDegrees, endDegrees) {
+    startAngle = (Math.PI/180) * startDegrees;
+    endAngle = (Math.PI/180) * endDegrees;
+
+    ctx.beginPath();
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = "lightblue";
+    ctx.arc( canvas.width/2, canvas.height/2, 35, startAngle, endAngle, false );
+    ctx.stroke();
+    ctx.closePath();
+  }
+
+  function drawText(i){
+    ctx.beginPath();
+    ctx.clearRect(canvas.width/2 - 20.2, canvas.height/2 - 20, 40, 40);
+    ctx.fillStyle = "blue";
+    ctx.font = "13px Times New";
+
+    if (i === 360) {
+      ctx.fillText('Done', canvas.width/2 - 15, canvas.height/2 + 3);
+    } else if (i === 5 || i % 20 === 0) {
+      ctx.fillText('loading', canvas.width/2 - 21, canvas.height/2 + 3);
+    }
+
+    ctx.closePath();
+  }
+
+  function animateDrawCircle(i){
+    setTimeout(function() { // each invocation of this function pauses for 30 ms and then calls itself again
+      drawArc(i, i + 1); // draw the next degree of the circle
+
+      if (++i < 360) {
+        animateDrawCircle(i);
+      };
+
+      if (i === 5 || i % 10 === 0) {
+        drawText(i);
+      }
+    }, 35);
+  };
 })
