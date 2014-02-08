@@ -16,7 +16,7 @@ $(function() {
     return $("<a href='" + link + "' class='" + className + "'" + buttonQuery + "></a>").append(button);
   };
 
-  var appendLi = function(foodObject) {
+  var prePendLi = function(foodObject) {
     console.log('appending food reco');
 
     var li = $("<li class='food'" + "id='" + foodObject.id + "'></li>");
@@ -42,13 +42,11 @@ $(function() {
   };
 
   // attach even listener to #generate button
-  // ajax for reco
-    // progress bar while loading food
-  // upon success, persist to DB & immediate prepend to list
   $('a#generate').on('click', function(e) {
     console.log('click GENERATE');
     e.preventDefault();
 
+    // ajax for reco
     $.ajax({
       url: '/recommendations/generate',
       type: 'GET',
@@ -56,6 +54,8 @@ $(function() {
       data: {id: sessionID},
       beforeSend: function() {
         console.log('progress spinner start');
+
+        // progress bar while loading food
         $('#circle').show();
         animateDrawCircle(0);
       },
@@ -65,7 +65,8 @@ $(function() {
 
         $('#circle').hide();
 
-        appendLi(foodObject);
+        // upon success, persist to DB & immediate prepend to list
+        prePendLi(foodObject);
       },
       error: function() {
         console.log('reco gen ERROR');
@@ -103,7 +104,7 @@ $(function() {
   var canvas = $('#circle')[0];
   var ctx = canvas.getContext("2d");
 
-  $(canvas).css({width: "400", height: "200"}); // squish it to make the pixels work!
+  $(canvas).css({width: "400", height: "200"});
 
   function drawArc(startDegrees, endDegrees) {
     startAngle = (Math.PI/180) * startDegrees;
@@ -133,7 +134,7 @@ $(function() {
   }
 
   function animateDrawCircle(i){
-    setTimeout(function() { // each invocation of this function pauses for 30 ms and then calls itself again
+    setTimeout(function() { // each invocation of this function pauses for 35 ms and then calls itself again
       drawArc(i, i + 1); // draw the next degree of the circle
 
       if (++i < 360) {
